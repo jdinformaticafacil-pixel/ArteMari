@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Personalizados · Mimo &amp; Arcilla</title>
+<meta name="description" content="Encarga una taza o figura de arcilla modelada a mano a tu medida.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="aviso">Hecho a mano · Piezas únicas · Pedidos personalizados</div>
+
+<header class="cabecera">
+  <div class="contenedor">
+    <a class="logo" href="index.html">Mimo &amp; Arcilla</a>
+    <nav class="menu" aria-label="Principal">
+      <a href="index.html#tienda">Tienda</a>
+      <a href="personalizados.html" aria-current="page">Personalizados</a>
+      <a href="index.html#taller">El taller</a>
+      <a href="index.html#contacto">Contacto</a>
+    </nav>
+    <div class="iconos">
+      <button class="icono-btn" aria-label="Buscar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+      <button class="icono-btn" aria-label="Carrito"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.2 11h10.6L20 7H6.2"/><circle cx="9" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="hero-simple">
+  <div class="contenedor">
+    <div class="interior">
+      <div class="sobretitulo">Por encargo</div>
+      <h1>Tu idea, modelada a mano</h1>
+      <p>Un personaje favorito, una mascota, un oficio, un recuerdo. Cuéntame qué imaginas y te preparo un presupuesto sin compromiso.</p>
+    </div>
+  </div>
+</section>
+
+<section class="seccion" style="padding: 72px 0 24px">
+  <div class="contenedor">
+    <div class="pasos-cortos">
+      <div class="paso"><div class="numero">1</div><b>Cuéntame tu idea</b><span>Con el formulario de esta página.</span></div>
+      <div class="paso"><div class="numero">2</div><b>Presupuesto y plazo</b><span>Te respondo en [X] días con precio y fecha.</span></div>
+      <div class="paso"><div class="numero">3</div><b>Modelado a mano</b><span>Pago el encargo y empiezo a esculpir.</span></div>
+      <div class="paso"><div class="numero">4</div><b>Envío</b><span>Embalada con cuidado, hasta tu puerta.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="seccion" style="padding: 48px 0 96px">
+  <div class="contenedor encargo">
+
+    <form class="formulario" onsubmit="event.preventDefault(); alert('Formulario de muestra: todavía no envía nada.');">
+      <h2>Pide tu presupuesto</h2>
+
+      <div class="fila">
+        <div class="campo"><label for="nombre">Tu nombre</label><input id="nombre" type="text"></div>
+        <div class="campo"><label for="email">Correo electrónico</label><input id="email" type="email"></div>
+      </div>
+
+      <div class="fila">
+        <div class="campo">
+          <label for="tipo">¿Qué quieres encargar?</label>
+          <select id="tipo"><option>Una taza</option><option>Un llavero</option><option>Un imán</option><option>Una figura</option><option>Otra cosa</option></select>
+        </div>
+        <div class="campo"><label for="fecha">¿Para cuándo la necesitas?</label><input id="fecha" type="date"></div>
+      </div>
+
+      <div class="campo">
+        <label for="idea">Cuéntame tu idea</label>
+        <textarea id="idea" rows="5" placeholder="Personaje, colores, detalles que no pueden faltar, para quién es…"></textarea>
+      </div>
+
+      <div class="campo">
+        <label for="fotos">Fotos de referencia</label>
+        <input id="fotos" type="file" multiple>
+      </div>
+
+      <div class="consentimiento">
+        <input id="acepto" type="checkbox">
+        <label for="acepto">He leído la política de privacidad y acepto que uses estos datos para responder a mi solicitud. [ENLACE A LA POLÍTICA]</label>
+      </div>
+
+      <button class="boton boton-acento" type="submit">Enviar solicitud</button>
+    </form>
+
+    <aside class="lateral">
+      <h2>Trabajos anteriores</h2>
+      <div class="fotos">
+        <img src="img/taza-jardinera.jpg" alt="Taza con figura de una chica con sombrero y un ramo de flores" style="object-position: 50% 35%">
+        <img src="img/taza-sabio.jpg" alt="Taza con figura de un sabio junto a una pizarra con fórmulas" style="object-position: 20% 60%">
+      </div>
+      <div class="nota">
+        <b>Antes de pedir</b>
+        <span>Plazo habitual de elaboración: [X] semanas.</span>
+        <span>Precio orientativo: desde [XX] €, según complejidad.</span>
+        <span>[CONDICIONES DE LOS PEDIDOS A MEDIDA: cambios y devoluciones]</span>
+      </div>
+    </aside>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="pie pie-simple">
+  <div class="contenedor">
+    <div class="logo">Mimo &amp; Arcilla</div>
+    <nav aria-label="Legal"><a href="index.html#contacto">Aviso legal</a><a href="index.html#contacto">Privacidad</a><a href="index.html#contacto">Cookies</a><a href="index.html#contacto">Condiciones de venta</a></nav>
+    <div>© 2026 [NOMBRE DE LA MARCA] · Web de muestra</div>
+  </div>
+</footer>
+
+</body>
+</html>
