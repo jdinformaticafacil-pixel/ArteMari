@@ -26,7 +26,7 @@ body {
 }
 a { color: inherit; text-decoration: none; }
 a:hover { opacity: .85; }
-img { display: block; max-width: 100%; }
+img { display: block; max-width: 100%; height: auto; }
 h1, h2, h3 { font-family: var(--serif); font-weight: 500; margin: 0; letter-spacing: -0.015em; }
 p { margin: 0; }
 
@@ -607,6 +607,46 @@ button.boton-contorno { color: inherit; }
 @media (max-width: 640px) {
   .pie { padding-bottom: 104px; }
 }
+
+/* Indicador «Desliza» en la portada */
+.hero .contenedor { position: relative; }
+.desliza { position: absolute; left: 50%; bottom: 22px; translate: -50% 0; display: flex; flex-direction: column; align-items: center; gap: 8px; color: #B9AC9C; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; }
+.desliza::after { content: ""; width: 1.5px; height: 34px; background: linear-gradient(var(--crema) 50%, transparent 50%) 0 0 / 100% 200%; opacity: .7; animation: desliza-linea 1.8s ease-in-out infinite; }
+.desliza:hover { color: var(--crema); opacity: 1; }
+@keyframes desliza-linea { 0% { background-position: 0 100%; } 100% { background-position: 0 -100%; } }
+@media (max-width: 1000px) { .desliza { display: none; } }
+
+/* Fotos ampliables y visor a pantalla completa */
+img[data-ampliar] { cursor: zoom-in; }
+.visor { position: fixed; inset: 0; z-index: 130; background: rgba(24, 18, 16, .94); display: flex; align-items: center; justify-content: center; padding: 64px 72px; opacity: 0; visibility: hidden; transition: opacity .3s, visibility 0s .3s; }
+.visor.abierto { opacity: 1; visibility: visible; transition: opacity .3s; }
+.visor-figura { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: 100%; max-height: 100%; }
+.visor-figura img { max-width: min(92vw, 900px); max-height: calc(100vh - 140px); width: auto; height: auto; object-fit: contain; border-radius: 12px; box-shadow: 0 30px 80px rgba(0, 0, 0, .5); }
+.visor-figura img.entra { animation: visor-entra .35s cubic-bezier(.2, .7, .2, 1); }
+@keyframes visor-entra { from { opacity: 0; scale: .96; } }
+.visor-figura figcaption { color: #B9AC9C; font-size: 14px; letter-spacing: .08em; }
+.visor-cerrar { position: absolute; top: 14px; right: 14px; color: var(--crema); }
+.visor-flecha { position: absolute; top: 50%; translate: 0 -50%; width: 52px; height: 52px; border-radius: 50%; border: 1.5px solid rgba(246, 239, 230, .4); background: rgba(246, 239, 230, .08); color: var(--crema); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color .2s, border-color .2s; }
+.visor-flecha:hover { background: rgba(246, 239, 230, .18); border-color: var(--crema); }
+.visor-ant { left: 16px; }
+.visor-sig { right: 16px; }
+.visor.una-sola .visor-flecha { display: none; }
+@media (max-width: 640px) {
+  .visor { padding: 56px 12px 72px; }
+  .visor-flecha { top: auto; bottom: 14px; translate: none; width: 46px; height: 46px; }
+  .visor-ant { left: calc(50% - 56px); }
+  .visor-sig { right: calc(50% - 56px); }
+}
+
+/* Errores de los formularios, junto a cada campo */
+.error-campo { margin: 4px 0 0; color: #A3261A; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 6px; animation: aparece .3s ease; }
+.error-campo::before { content: "!"; flex: none; width: 18px; height: 18px; border-radius: 50%; background: #A3261A; color: #fff; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+.campo [aria-invalid="true"] { border-color: #A3261A; box-shadow: 0 0 0 3px rgba(163, 38, 26, .12); }
+.consentimiento { flex-wrap: wrap; }
+.consentimiento .error-campo { flex-basis: 100%; }
+.correo .error-campo { color: #fff; }
+.correo .error-campo::before { background: #fff; color: var(--acento); }
+.correo .campo [aria-invalid="true"] { box-shadow: 0 0 0 3px rgba(255, 255, 255, .5); }
 
 /* Respeta a quien prefiere menos movimiento */
 @media (prefers-reduced-motion: reduce) {

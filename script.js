@@ -28,7 +28,9 @@
       notaMuestra: 'Web de muestra: el pago real lo gestionará WooCommerce.',
       vacio: 'Todavía no has añadido nada.', quitar: 'Quitar', art1: '1 artículo', artN: '%n artículos',
       yaEsta: 'Ya está en tu carrito.', pago: 'Aquí empezaría el pago con WooCommerce.', carritoVacio: 'El carrito está vacío.',
-      seleccionadas: 'Seleccionadas: ', res1: '1 resultado', resN: '%n resultados'
+      seleccionadas: 'Seleccionadas: ', res1: '1 resultado', resN: '%n resultados',
+      visor: 'Visor de fotos', ampliar: 'Ampliar', cerrar: 'Cerrar', anterior: 'Foto anterior', siguiente: 'Foto siguiente',
+      errObligatorio: 'Este campo es obligatorio.', errEmail: 'Revisa el correo: parece que falta algo.', errAcepto: 'Necesito que aceptes la política de privacidad para poder responderte.'
     },
     ca: {
       whatsMsg: 'Hola, he vist el vostre web i m’agradaria tenir més informació.',
@@ -47,7 +49,9 @@
       notaMuestra: 'Web de mostra: el pagament real el gestionarà WooCommerce.',
       vacio: 'Encara no has afegit res.', quitar: 'Treu', art1: '1 article', artN: '%n articles',
       yaEsta: 'Ja és a la teva cistella.', pago: 'Aquí començaria el pagament amb WooCommerce.', carritoVacio: 'La cistella és buida.',
-      seleccionadas: 'Seleccionades: ', res1: '1 resultat', resN: '%n resultats'
+      seleccionadas: 'Seleccionades: ', res1: '1 resultat', resN: '%n resultats',
+      visor: 'Visor de fotos', ampliar: 'Amplia', cerrar: 'Tanca', anterior: 'Foto anterior', siguiente: 'Foto següent',
+      errObligatorio: 'Aquest camp és obligatori.', errEmail: 'Revisa el correu: sembla que hi falta alguna cosa.', errAcepto: 'Cal que acceptis la política de privacitat per poder-te respondre.'
     },
     en: {
       whatsMsg: 'Hi! I’ve seen your website and would like some more information.',
@@ -66,7 +70,9 @@
       notaMuestra: 'Demo site: real payments will be handled by WooCommerce.',
       vacio: 'Nothing here yet.', quitar: 'Remove', art1: '1 item', artN: '%n items',
       yaEsta: 'It’s already in your cart.', pago: 'This is where WooCommerce checkout would start.', carritoVacio: 'Your cart is empty.',
-      seleccionadas: 'Selected: ', res1: '1 result', resN: '%n results'
+      seleccionadas: 'Selected: ', res1: '1 result', resN: '%n results',
+      visor: 'Photo viewer', ampliar: 'Enlarge', cerrar: 'Close', anterior: 'Previous photo', siguiente: 'Next photo',
+      errObligatorio: 'This field is required.', errEmail: 'Please check your email address — something seems to be missing.', errAcepto: 'Please accept the privacy policy so I can reply.'
     }
   };
   if (!TEXTOS[IDIOMA]) IDIOMA = 'es';
@@ -711,9 +717,51 @@
   pintar();
 
   /* ---------- Formularios de muestra ---------- */
+  /* Comprueba los campos y muestra el error junto a cada uno */
+  function errorDe(campo) {
+    var valor = (campo.value || '').trim();
+    if (campo.required && (campo.type === 'checkbox' ? !campo.checked : !valor)) {
+      return campo.type === 'checkbox' ? T.errAcepto : T.errObligatorio;
+    }
+    if (campo.type === 'email' && valor && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor)) return T.errEmail;
+    return '';
+  }
+  function marcarError(campo, mensaje) {
+    var id = campo.id + '-error';
+    var nota = document.getElementById(id);
+    if (!mensaje) {
+      campo.removeAttribute('aria-invalid');
+      if (nota) nota.remove();
+      return;
+    }
+    campo.setAttribute('aria-invalid', 'true');
+    if (!nota) {
+      nota = document.createElement('p');
+      nota.className = 'error-campo';
+      nota.id = id;
+      (campo.closest('.campo, .consentimiento') || campo.parentNode).appendChild(nota);
+      campo.setAttribute('aria-describedby', id);
+    }
+    nota.textContent = mensaje;
+  }
   document.querySelectorAll('form[data-demo]').forEach(function (form) {
+    form.noValidate = true;
+    var campos = form.querySelectorAll('input[id], textarea[id], select[id]');
+    campos.forEach(function (campo) {
+      var revisar = function () { if (campo.getAttribute('aria-invalid')) marcarError(campo, errorDe(campo)); };
+      campo.addEventListener('input', revisar);
+      campo.addEventListener('change', revisar);
+      campo.addEventListener('blur', function () { if (campo.value) marcarError(campo, errorDe(campo)); });
+    });
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      var primero = null;
+      campos.forEach(function (campo) {
+        var mensaje = errorDe(campo);
+        marcarError(campo, mensaje);
+        if (mensaje && !primero) primero = campo;
+      });
+      if (primero) { primero.focus(); return; }
       avisar(form.getAttribute('data-demo'));
       form.reset();
       form.querySelectorAll('.lista-archivos').forEach(function (l) { l.textContent = ''; });
@@ -792,4 +840,81 @@
       boton.closest('.video').classList.add('reproduciendo');
     });
   });
+
+  /* ---------- Visor de fotos a pantalla completa ---------- */
+  var ampliables = document.querySelectorAll('img[data-ampliar]');
+  if (ampliables.length) {
+    var flecha = function (d) {
+      return '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + d + '"/></svg>';
+    };
+    var visor = document.createElement('div');
+    visor.className = 'visor';
+    visor.setAttribute('role', 'dialog');
+    visor.setAttribute('aria-modal', 'true');
+    visor.setAttribute('aria-label', T.visor);
+    visor.inert = true;
+    visor.innerHTML =
+      '<button type="button" class="icono-btn visor-cerrar" aria-label="' + T.cerrar + '">' + flecha('M6 6l12 12M18 6L6 18') + '</button>' +
+      '<button type="button" class="visor-flecha visor-ant" aria-label="' + T.anterior + '">' + flecha('M15 6l-6 6 6 6') + '</button>' +
+      '<figure class="visor-figura"><img alt=""><figcaption></figcaption></figure>' +
+      '<button type="button" class="visor-flecha visor-sig" aria-label="' + T.siguiente + '">' + flecha('M9 6l6 6-6 6') + '</button>';
+    document.body.appendChild(visor);
+    var visorImg = visor.querySelector('.visor-figura img');
+    var visorPie = visor.querySelector('figcaption');
+    var grupo = [], posicion = 0, focoAntes = null;
+
+    var mostrarFoto = function (i) {
+      posicion = (i + grupo.length) % grupo.length;
+      var el = grupo[posicion];
+      visorImg.src = el.currentSrc || el.src;
+      visorImg.alt = el.alt;
+      visorPie.textContent = grupo.length > 1 ? (posicion + 1) + ' / ' + grupo.length : '';
+      visorImg.classList.remove('entra'); void visorImg.offsetWidth; visorImg.classList.add('entra');
+    };
+    var abrirVisor = function (el) {
+      var nombre = el.getAttribute('data-ampliar');
+      grupo = Array.prototype.filter.call(ampliables, function (x) { return x.getAttribute('data-ampliar') === nombre; });
+      visor.classList.toggle('una-sola', grupo.length < 2);
+      focoAntes = document.activeElement;
+      mostrarFoto(grupo.indexOf(el));
+      visor.inert = false;
+      visor.classList.add('abierto');
+      document.body.classList.add('sin-scroll');
+      setTimeout(function () { visor.querySelector('.visor-cerrar').focus(); }, 50);
+    };
+    var cerrarVisor = function () {
+      if (!visor.classList.contains('abierto')) return;
+      visor.classList.remove('abierto');
+      visor.inert = true;
+      document.body.classList.remove('sin-scroll');
+      if (focoAntes && focoAntes.focus) focoAntes.focus();
+    };
+    ampliables.forEach(function (el) {
+      el.setAttribute('tabindex', '0');
+      el.setAttribute('role', 'button');
+      el.setAttribute('aria-label', T.ampliar + ': ' + el.alt);
+      el.addEventListener('click', function () { abrirVisor(el); });
+      el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrirVisor(el); }
+      });
+    });
+    visor.querySelector('.visor-cerrar').addEventListener('click', cerrarVisor);
+    visor.querySelector('.visor-ant').addEventListener('click', function () { mostrarFoto(posicion - 1); });
+    visor.querySelector('.visor-sig').addEventListener('click', function () { mostrarFoto(posicion + 1); });
+    visor.addEventListener('click', function (e) { if (e.target === visor) cerrarVisor(); });
+    document.addEventListener('keydown', function (e) {
+      if (!visor.classList.contains('abierto')) return;
+      if (e.key === 'Escape') cerrarVisor();
+      if (e.key === 'ArrowLeft' && grupo.length > 1) mostrarFoto(posicion - 1);
+      if (e.key === 'ArrowRight' && grupo.length > 1) mostrarFoto(posicion + 1);
+    });
+    var inicioX = null;
+    visor.addEventListener('touchstart', function (e) { inicioX = e.touches[0].clientX; }, { passive: true });
+    visor.addEventListener('touchend', function (e) {
+      if (inicioX === null || grupo.length < 2) return;
+      var dx = e.changedTouches[0].clientX - inicioX;
+      if (Math.abs(dx) > 50) mostrarFoto(posicion + (dx < 0 ? 1 : -1));
+      inicioX = null;
+    });
+  }
 })();
