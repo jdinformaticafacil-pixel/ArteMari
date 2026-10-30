@@ -16,7 +16,7 @@
       whatsAria: 'Escribir por WhatsApp', hablamos: '¿Hablamos?',
       cVer: 'Ver', cZoom: 'Zoom', cVideo: 'Ver vídeo', cEncargar: 'Encargar',
       pref: 'Preferencias', cerrarPref: 'Cerrar preferencias', idioma: 'Idioma',
-      puntero: 'Puntero interactivo', anim: 'Animaciones', textoGrande: 'Texto más grande',
+      puntero: 'Puntero interactivo', anim: 'Animaciones', textoGrande: 'Texto más grande', oscuro: 'Modo oscuro',
       restablecer: 'Restablecer', restablecidas: 'Preferencias restablecidas.',
       abrirMenu: 'Abrir menú', menu: 'Menú', cerrarMenu: 'Cerrar menú',
       menuPie: 'Hecho a mano · Piezas únicas · Cursos y talleres',
@@ -37,7 +37,7 @@
       whatsAria: 'Escriu-nos per WhatsApp', hablamos: 'En parlem?',
       cVer: 'Veure', cZoom: 'Zoom', cVideo: 'Veure vídeo', cEncargar: 'Encarregar',
       pref: 'Preferències', cerrarPref: 'Tanca les preferències', idioma: 'Idioma',
-      puntero: 'Punter interactiu', anim: 'Animacions', textoGrande: 'Text més gran',
+      puntero: 'Punter interactiu', anim: 'Animacions', textoGrande: 'Text més gran', oscuro: 'Mode fosc',
       restablecer: 'Restableix', restablecidas: 'Preferències restablertes.',
       abrirMenu: 'Obre el menú', menu: 'Menú', cerrarMenu: 'Tanca el menú',
       menuPie: 'Fet a mà · Peces úniques · Cursos i tallers',
@@ -58,7 +58,7 @@
       whatsAria: 'Message us on WhatsApp', hablamos: 'Chat with us',
       cVer: 'View', cZoom: 'Zoom', cVideo: 'Watch', cEncargar: 'Order',
       pref: 'Preferences', cerrarPref: 'Close preferences', idioma: 'Language',
-      puntero: 'Interactive cursor', anim: 'Animations', textoGrande: 'Larger text',
+      puntero: 'Interactive cursor', anim: 'Animations', textoGrande: 'Larger text', oscuro: 'Dark mode',
       restablecer: 'Reset', restablecidas: 'Preferences reset.',
       abrirMenu: 'Open menu', menu: 'Menu', cerrarMenu: 'Close menu',
       menuPie: 'Handmade · One-of-a-kind pieces · Courses and workshops',
@@ -90,6 +90,9 @@
   function aplicarClases() {
     raiz.classList.toggle('sin-animaciones', reducir);
     raiz.classList.toggle('texto-grande', !!prefs.textoGrande);
+    raiz.classList.toggle('oscuro', !!prefs.oscuro);
+    var tema = document.querySelector('meta[name="theme-color"]');
+    if (tema) tema.setAttribute('content', prefs.oscuro ? '#120E0C' : '#241C19');
   }
   aplicarClases();
 
@@ -122,7 +125,10 @@
     '<path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5z"/>' +
     '<path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg>' +
     '<span class="whatsapp-texto">' + T.hablamos + '</span>';
-  document.body.appendChild(whatsapp);
+  var zonaWhatsapp = document.createElement('aside');
+  zonaWhatsapp.setAttribute('aria-label', 'WhatsApp');
+  zonaWhatsapp.appendChild(whatsapp);
+  document.body.appendChild(zonaWhatsapp);
   /* Los demás enlaces de WhatsApp de la web usan el mismo número y mensaje */
   document.querySelectorAll('.enlace-whatsapp').forEach(function (a) { a.href = whatsapp.href; });
 
@@ -241,6 +247,7 @@
       interruptor('puntero', T.puntero) +
       interruptor('animaciones', T.anim) +
       interruptor('textoGrande', T.textoGrande) +
+      interruptor('oscuro', T.oscuro) +
       '</div>' +
       '<button type="button" class="restablecer">' + T.restablecer + '</button>';
     document.body.appendChild(panel);
@@ -258,7 +265,7 @@
       panel.querySelectorAll('[data-idioma]').forEach(function (b) {
         b.setAttribute('aria-pressed', String(b.getAttribute('data-idioma') === idioma));
       });
-      var valores = { puntero: prefs.puntero === true, animaciones: !reducir, textoGrande: !!prefs.textoGrande };
+      var valores = { puntero: prefs.puntero === true, animaciones: !reducir, textoGrande: !!prefs.textoGrande, oscuro: !!prefs.oscuro };
       panel.querySelectorAll('[data-pref]').forEach(function (b) {
         b.setAttribute('aria-checked', String(valores[b.getAttribute('data-pref')]));
       });
@@ -874,7 +881,8 @@
     var mostrarFoto = function (i) {
       posicion = (i + grupo.length) % grupo.length;
       var el = grupo[posicion];
-      visorImg.src = el.currentSrc || el.src;
+      var mayor = (el.getAttribute('srcset') || '').split(',').pop().trim().split(' ')[0];
+      visorImg.src = mayor || el.src;
       visorImg.alt = el.alt;
       visorPie.textContent = grupo.length > 1 ? (posicion + 1) + ' / ' + grupo.length : '';
       visorImg.classList.remove('entra'); void visorImg.offsetWidth; visorImg.classList.add('entra');

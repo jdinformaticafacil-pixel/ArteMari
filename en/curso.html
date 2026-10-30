@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<script>try{if((JSON.parse(localStorage.getItem('mimo-preferencias'))||{}).oscuro)document.documentElement.classList.add('oscuro')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap">
@@ -21,12 +23,12 @@
 <meta name="twitter:card" content="summary_large_image">
 <title>Course: Sculpt your first figure on a mug · Mimo &amp; Arcilla</title>
 <meta name="description" content="Online course to sculpt your first polymer clay figure on a mug, from scratch.">
-<link rel="stylesheet" href="../style.css?v=15">
+<link rel="stylesheet" href="../style.css?v=16">
 </head>
 <body>
 <a class="saltar" href="#contenido">Skip to content</a>
 
-<div class="aviso"><div class="pista">
+<div class="aviso" aria-hidden="true"><div class="pista">
 <span>Handmade</span><span>One-of-a-kind pieces</span><span>Custom orders</span><span>Courses and workshops</span>
 <span aria-hidden="true">Handmade</span><span aria-hidden="true">One-of-a-kind pieces</span><span aria-hidden="true">Custom orders</span><span aria-hidden="true">Courses and workshops</span>
 <span aria-hidden="true">Handmade</span><span aria-hidden="true">One-of-a-kind pieces</span><span aria-hidden="true">Custom orders</span><span aria-hidden="true">Courses and workshops</span>
@@ -58,7 +60,7 @@
     <div class="curso-ficha">
       <div class="curso-principal">
         <div class="video revelar">
-          <img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-jardinera.jpg" alt="" style="object-position: 50% 35%">
+          <img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-jardinera.jpg" srcset="../taza-jardinera-480.webp 480w, ../taza-jardinera-800.webp 800w, ../taza-jardinera.webp 1050w" sizes="(max-width: 640px) 92vw, 560px" alt="" style="object-position: 50% 35%">
           <button class="play" type="button" aria-label="Watch the course introduction"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
           <div class="video-mensaje">The free introduction video will play here, hosted on Vimeo or Bunny Stream.</div>
         </div>
@@ -113,7 +115,7 @@
         <button class="boton boton-acento" type="button" data-carrito data-nombre="Course: “Sculpt your first figure on a mug”" data-precio="[XX] €" data-repetido="This course is already in your cart.">Enrol now</button>
         <a class="boton boton-contorno" href="taller.html#cursos">Try the free course</a>
         <p class="nota-muestra">Secure payment and instant access after purchase.</p>
-      </aside>
+      </div>
     </div>
   </div>
 </main>
@@ -134,6 +136,6 @@
   </div>
 </footer>
 
-<script src="../script.js?v=15"></script>
+<script src="../script.js?v=16"></script>
 </body>
 </html>

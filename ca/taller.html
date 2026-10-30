@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<script>try{if((JSON.parse(localStorage.getItem('mimo-preferencias'))||{}).oscuro)document.documentElement.classList.add('oscuro')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap">
@@ -21,12 +23,12 @@
 <meta name="twitter:card" content="summary_large_image">
 <title>Taller i cursos · Mimo &amp; Arcilla</title>
 <meta name="description" content="Cursos en línia i tallers presencials de modelatge en argila polimèrica, de pagament i gratuïts. Xerrades i vídeos del taller.">
-<link rel="stylesheet" href="../style.css?v=15">
+<link rel="stylesheet" href="../style.css?v=16">
 </head>
 <body>
 <a class="saltar" href="#contenido">Salta al contingut</a>
 
-<div class="aviso"><div class="pista">
+<div class="aviso" aria-hidden="true"><div class="pista">
 <span>Fet a mà</span><span>Peces úniques</span><span>Encàrrecs personalitzats</span><span>Cursos i tallers</span>
 <span aria-hidden="true">Fet a mà</span><span aria-hidden="true">Peces úniques</span><span aria-hidden="true">Encàrrecs personalitzats</span><span aria-hidden="true">Cursos i tallers</span>
 <span aria-hidden="true">Fet a mà</span><span aria-hidden="true">Peces úniques</span><span aria-hidden="true">Encàrrecs personalitzats</span><span aria-hidden="true">Cursos i tallers</span>
@@ -84,7 +86,7 @@
 
     <div class="cursos escalonado filtrable">
       <a class="curso revelar" href="curso.html" data-tipo="online pago">
-        <div class="marco"><img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-jardinera.jpg" alt="" style="object-position: 50% 40%"><span class="duracion">[X] h de vídeo</span></div>
+        <div class="marco"><img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-jardinera.jpg" srcset="../taza-jardinera-480.webp 480w, ../taza-jardinera-800.webp 800w, ../taza-jardinera.webp 1050w" sizes="(max-width: 640px) 92vw, 560px" alt="" style="object-position: 50% 40%"><span class="duracion">[X] h de vídeo</span></div>
         <div class="tarjeta-info">
           <div class="insignias"><span class="insignia">En línia</span><span class="insignia insignia-pago">De pagament</span></div>
           <h3>Modela la teva primera figura en una tassa</h3>
@@ -93,7 +95,7 @@
         </div>
       </a>
       <a class="curso revelar" href="curso.html" data-tipo="online gratis">
-        <div class="marco"><img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-sabio.jpg" alt="" style="object-position: 15% 45%"><span class="duracion">[X] min</span></div>
+        <div class="marco"><img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-sabio.jpg" srcset="../taza-sabio-480.webp 480w, ../taza-sabio-800.webp 800w, ../taza-sabio.webp 1050w" sizes="(max-width: 640px) 92vw, 560px" alt="" style="object-position: 15% 45%"><span class="duracion">[X] min</span></div>
         <div class="tarjeta-info">
           <div class="insignias"><span class="insignia">En línia</span><span class="insignia insignia-gratis">Gratuït</span></div>
           <h3>Iniciació a l’argila polimèrica</h3>
@@ -102,7 +104,7 @@
         </div>
       </a>
       <a class="curso revelar" href="curso.html" data-tipo="online pago">
-        <div class="marco"><img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-sabio.jpg" alt="" style="object-position: 12% 40%"><span class="duracion">[X] h de vídeo</span></div>
+        <div class="marco"><img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-sabio.jpg" srcset="../taza-sabio-480.webp 480w, ../taza-sabio-800.webp 800w, ../taza-sabio.webp 1050w" sizes="(max-width: 640px) 92vw, 560px" alt="" style="object-position: 12% 40%"><span class="duracion">[X] h de vídeo</span></div>
         <div class="tarjeta-info">
           <div class="insignias"><span class="insignia">En línia</span><span class="insignia insignia-pago">De pagament</span></div>
           <h3>Rostres i expressions en miniatura</h3>
@@ -111,7 +113,7 @@
         </div>
       </a>
       <a class="curso revelar" href="#presencial" data-tipo="presencial pago">
-        <div class="marco"><img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-jardinera.jpg" alt="" style="object-position: 50% 70%"><span class="duracion">[X] h · al taller</span></div>
+        <div class="marco"><img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-jardinera.jpg" srcset="../taza-jardinera-480.webp 480w, ../taza-jardinera-800.webp 800w, ../taza-jardinera.webp 1050w" sizes="(max-width: 640px) 92vw, 560px" alt="" style="object-position: 50% 70%"><span class="duracion">[X] h · al taller</span></div>
         <div class="tarjeta-info">
           <div class="insignias"><span class="insignia">Presencial</span><span class="insignia insignia-pago">De pagament</span></div>
           <h3>La teva tassa en un matí</h3>
@@ -120,7 +122,7 @@
         </div>
       </a>
       <a class="curso revelar" href="#presencial" data-tipo="presencial pago">
-        <div class="marco"><img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-jardinera.jpg" alt="" style="object-position: 30% 55%"><span class="duracion">[X] h · al taller</span></div>
+        <div class="marco"><img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-jardinera.jpg" srcset="../taza-jardinera-480.webp 480w, ../taza-jardinera-800.webp 800w, ../taza-jardinera.webp 1050w" sizes="(max-width: 640px) 92vw, 560px" alt="" style="object-position: 30% 55%"><span class="duracion">[X] h · al taller</span></div>
         <div class="tarjeta-info">
           <div class="insignias"><span class="insignia">Presencial</span><span class="insignia insignia-pago">De pagament</span></div>
           <h3>Taller familiar de modelatge</h3>
@@ -129,7 +131,7 @@
         </div>
       </a>
       <a class="curso revelar" href="#presencial" data-tipo="presencial gratis">
-        <div class="marco"><img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-sabio.jpg" alt="" style="object-position: 85% 60%"><span class="duracion">[X] min · al taller</span></div>
+        <div class="marco"><img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-sabio.jpg" srcset="../taza-sabio-480.webp 480w, ../taza-sabio-800.webp 800w, ../taza-sabio.webp 1050w" sizes="(max-width: 640px) 92vw, 560px" alt="" style="object-position: 85% 60%"><span class="duracion">[X] min · al taller</span></div>
         <div class="tarjeta-info">
           <div class="insignias"><span class="insignia">Presencial</span><span class="insignia insignia-gratis">Gratuït</span></div>
           <h3>Xerrada oberta: de l’esbós a la peça</h3>
@@ -151,7 +153,7 @@
     <div class="charlas escalonado">
       <article class="charla revelar">
         <div class="video">
-          <img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-sabio.jpg" alt="" style="object-position: 30% 55%">
+          <img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-sabio.jpg" srcset="../taza-sabio-480.webp 480w, ../taza-sabio-800.webp 800w, ../taza-sabio.webp 1050w" sizes="(max-width: 640px) 92vw, 560px" alt="" style="object-position: 30% 55%">
           <button class="play" type="button" aria-label="Reprodueix: De l’esbós a la tassa"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
           <div class="video-mensaje">Aquí es reproduirà el vídeo, allotjat a Vimeo o Bunny Stream.</div>
         </div>
@@ -160,7 +162,7 @@
       </article>
       <article class="charla revelar">
         <div class="video">
-          <img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-jardinera.jpg" alt="" style="object-position: 50% 30%">
+          <img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-jardinera.jpg" srcset="../taza-jardinera-480.webp 480w, ../taza-jardinera-800.webp 800w, ../taza-jardinera.webp 1050w" sizes="(max-width: 640px) 92vw, 560px" alt="" style="object-position: 50% 30%">
           <button class="play" type="button" aria-label="Reprodueix: Cuidar i conservar les teves peces"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
           <div class="video-mensaje">Aquí es reproduirà el vídeo, allotjat a Vimeo o Bunny Stream.</div>
         </div>
@@ -228,6 +230,6 @@
   </div>
 </footer>
 
-<script src="../script.js?v=15"></script>
+<script src="../script.js?v=16"></script>
 </body>
 </html>

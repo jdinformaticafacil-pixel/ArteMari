@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<script>try{if((JSON.parse(localStorage.getItem('mimo-preferencias'))||{}).oscuro)document.documentElement.classList.add('oscuro')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap">
@@ -21,12 +23,12 @@
 <meta name="twitter:card" content="summary_large_image">
 <title>Botiga · Mimo &amp; Arcilla</title>
 <meta name="description" content="Tasses, clauers, imants i figures d’argila polimèrica modelats a mà. Peces úniques i per encàrrec.">
-<link rel="stylesheet" href="../style.css?v=15">
+<link rel="stylesheet" href="../style.css?v=16">
 </head>
 <body>
 <a class="saltar" href="#contenido">Salta al contingut</a>
 
-<div class="aviso"><div class="pista">
+<div class="aviso" aria-hidden="true"><div class="pista">
 <span>Fet a mà</span><span>Peces úniques</span><span>Encàrrecs personalitzats</span><span>Cursos i tallers</span>
 <span aria-hidden="true">Fet a mà</span><span aria-hidden="true">Peces úniques</span><span aria-hidden="true">Encàrrecs personalitzats</span><span aria-hidden="true">Cursos i tallers</span>
 <span aria-hidden="true">Fet a mà</span><span aria-hidden="true">Peces úniques</span><span aria-hidden="true">Encàrrecs personalitzats</span><span aria-hidden="true">Cursos i tallers</span>
@@ -78,9 +80,10 @@
       <p class="cuenta" aria-live="polite"></p>
     </div>
 
+    <h2 class="solo-lectores">Catàleg</h2>
     <div class="productos escalonado filtrable">
       <a class="tarjeta revelar" href="producto.html" data-tipo="tazas disponible">
-        <div class="marco"><img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-sabio.jpg" alt="Tassa amb una figura d’un savi al costat d’una pissarra amb fórmules" style="object-position: 20% 62%"></div>
+        <div class="marco"><img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-sabio.jpg" srcset="../taza-sabio-480.webp 480w, ../taza-sabio-800.webp 800w, ../taza-sabio.webp 1050w" sizes="(max-width: 640px) 92vw, 560px" alt="Tassa amb una figura d’un savi al costat d’una pissarra amb fórmules" style="object-position: 20% 62%"></div>
         <div class="tarjeta-info">
           <span class="etiqueta">Peça única · Disponible</span>
           <h3>Tassa «El savi de la pissarra»</h3>
@@ -88,7 +91,7 @@
         </div>
       </a>
       <a class="tarjeta vendida revelar" href="personalizados.html" data-tipo="tazas">
-        <div class="marco"><img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-jardinera.jpg" alt="Tassa amb una figura d’una noia amb barret i un ram de flors (venuda)" style="object-position: 50% 35%"><span class="sello">Venuda</span></div>
+        <div class="marco"><img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-jardinera.jpg" srcset="../taza-jardinera-480.webp 480w, ../taza-jardinera-800.webp 800w, ../taza-jardinera.webp 1050w" sizes="(max-width: 640px) 92vw, 560px" alt="Tassa amb una figura d’una noia amb barret i un ram de flors (venuda)" style="object-position: 50% 35%"><span class="sello">Venuda</span></div>
         <div class="tarjeta-info">
           <span class="etiqueta etiqueta-vendida">Ja té propietari</span>
           <h3>Tassa «La jardinera»</h3>
@@ -151,6 +154,6 @@
   </div>
 </footer>
 
-<script src="../script.js?v=15"></script>
+<script src="../script.js?v=16"></script>
 </body>
 </html>

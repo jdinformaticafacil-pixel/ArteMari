@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<script>try{if((JSON.parse(localStorage.getItem('mimo-preferencias'))||{}).oscuro)document.documentElement.classList.add('oscuro')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap">
@@ -21,12 +23,12 @@
 <meta name="twitter:card" content="summary_large_image">
 <title>Shop · Mimo &amp; Arcilla</title>
 <meta name="description" content="Polymer clay mugs, keyrings, magnets and figures sculpted by hand. One-of-a-kind and made to order.">
-<link rel="stylesheet" href="../style.css?v=15">
+<link rel="stylesheet" href="../style.css?v=16">
 </head>
 <body>
 <a class="saltar" href="#contenido">Skip to content</a>
 
-<div class="aviso"><div class="pista">
+<div class="aviso" aria-hidden="true"><div class="pista">
 <span>Handmade</span><span>One-of-a-kind pieces</span><span>Custom orders</span><span>Courses and workshops</span>
 <span aria-hidden="true">Handmade</span><span aria-hidden="true">One-of-a-kind pieces</span><span aria-hidden="true">Custom orders</span><span aria-hidden="true">Courses and workshops</span>
 <span aria-hidden="true">Handmade</span><span aria-hidden="true">One-of-a-kind pieces</span><span aria-hidden="true">Custom orders</span><span aria-hidden="true">Courses and workshops</span>
@@ -78,9 +80,10 @@
       <p class="cuenta" aria-live="polite"></p>
     </div>
 
+    <h2 class="solo-lectores">Catalogue</h2>
     <div class="productos escalonado filtrable">
       <a class="tarjeta revelar" href="producto.html" data-tipo="tazas disponible">
-        <div class="marco"><img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-sabio.jpg" alt="Mug with a figure of a sage beside a blackboard full of formulas" style="object-position: 20% 62%"></div>
+        <div class="marco"><img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-sabio.jpg" srcset="../taza-sabio-480.webp 480w, ../taza-sabio-800.webp 800w, ../taza-sabio.webp 1050w" sizes="(max-width: 640px) 92vw, 560px" alt="Mug with a figure of a sage beside a blackboard full of formulas" style="object-position: 20% 62%"></div>
         <div class="tarjeta-info">
           <span class="etiqueta">One of a kind · Available</span>
           <h3>“The Blackboard Sage” mug</h3>
@@ -88,7 +91,7 @@
         </div>
       </a>
       <a class="tarjeta vendida revelar" href="personalizados.html" data-tipo="tazas">
-        <div class="marco"><img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-jardinera.jpg" alt="Mug with a figure of a girl with a hat and a bunch of flowers (sold)" style="object-position: 50% 35%"><span class="sello">Sold</span></div>
+        <div class="marco"><img width="1050" height="1400" loading="lazy" decoding="async" src="../taza-jardinera.jpg" srcset="../taza-jardinera-480.webp 480w, ../taza-jardinera-800.webp 800w, ../taza-jardinera.webp 1050w" sizes="(max-width: 640px) 92vw, 560px" alt="Mug with a figure of a girl with a hat and a bunch of flowers (sold)" style="object-position: 50% 35%"><span class="sello">Sold</span></div>
         <div class="tarjeta-info">
           <span class="etiqueta etiqueta-vendida">Already has a home</span>
           <h3>“The Gardener” mug</h3>
@@ -151,6 +154,6 @@
   </div>
 </footer>
 
-<script src="../script.js?v=15"></script>
+<script src="../script.js?v=16"></script>
 </body>
 </html>

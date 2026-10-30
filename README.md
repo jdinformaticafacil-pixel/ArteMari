@@ -20,3 +20,10 @@ Los colores están en las variables de `style.css` (bloque `:root`). El carrito,
 ## Idiomas
 
 Traducción manual en tres versiones: español en la raíz, catalán en `ca/` e inglés en `en/`. Cada página enlaza a sus equivalentes (`hreflang`) y el selector de la rueda de preferencias y el pie llevan a la misma página en el otro idioma. Los textos de la parte interactiva están en `script.js` (objeto `TEXTOS`).
+
+## Notas
+
+- **No indexable:** todas las páginas llevan `<meta name="robots" content="noindex">` para que Google no indexe la muestra y no compita con la web real (contenido duplicado). Para quitarlo, borra esa línea.
+- **Fotos:** cada foto tiene versiones WebP de 480, 800 y 1050 px; el navegador elige la adecuada (`srcset`).
+- **Preferencias del visitante:** idioma, puntero, animaciones, texto grande y modo oscuro (rueda de la cabecera).
+- **Accesibilidad:** revisada con axe-core (WCAG 2.1 AA) en modo claro y oscuro, sin incidencias.
