@@ -194,7 +194,7 @@
   }
 
   function aplicarPuntero() {
-    var activo = prefs.puntero !== false;
+    var activo = prefs.puntero === true;
     raiz.classList.toggle('sin-puntero', !activo);
     if (conRaton) raiz.classList.toggle('cursor-propio', activo);
   }
@@ -250,7 +250,7 @@
       panel.querySelectorAll('[data-idioma]').forEach(function (b) {
         b.setAttribute('aria-pressed', String(b.getAttribute('data-idioma') === idioma));
       });
-      var valores = { puntero: prefs.puntero !== false, animaciones: !reducir, textoGrande: !!prefs.textoGrande };
+      var valores = { puntero: prefs.puntero === true, animaciones: !reducir, textoGrande: !!prefs.textoGrande };
       panel.querySelectorAll('[data-pref]').forEach(function (b) {
         b.setAttribute('aria-checked', String(valores[b.getAttribute('data-pref')]));
       });
