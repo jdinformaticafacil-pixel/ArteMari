@@ -13,3 +13,7 @@ Maqueta navegable en HTML, CSS y JavaScript (sin dependencias) de la tienda de t
 - `404.html`: página de error para GitHub Pages
 
 Los colores están en las variables de `style.css` (bloque `:root`). El carrito, los formularios y los vídeos son de demostración: no envían ni cobran nada.
+
+## Idiomas
+
+Traducción manual en tres versiones: español en la raíz, catalán en `ca/` e inglés en `en/`. Cada página enlaza a sus equivalentes (`hreflang`) y el selector de la rueda de preferencias y el pie llevan a la misma página en el otro idioma. Los textos de la parte interactiva están en `script.js` (objeto `TEXTOS`).

@@ -598,6 +598,16 @@ button.boton-contorno { color: inherit; }
   .con-barra .arriba { bottom: 142px; }
 }
 
+/* Selector de idioma del pie */
+.pie-copy { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 24px; }
+.idiomas { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; color: #8C7F75; }
+.idiomas a { color: #D9CCBF; min-height: 32px; display: inline-flex; align-items: center; }
+.idiomas a:hover { color: var(--crema); opacity: 1; }
+.idiomas a[aria-current] { color: var(--crema); font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 640px) {
+  .pie { padding-bottom: 104px; }
+}
+
 /* Respeta a quien prefiere menos movimiento */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

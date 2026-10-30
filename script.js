@@ -7,6 +7,71 @@
   var reducir = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var conRaton = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
+
+  /* ---------- Textos en cada idioma (traducción manual) ---------- */
+  var IDIOMA = (raiz.getAttribute('lang') || 'es').slice(0, 2);
+  var TEXTOS = {
+    es: {
+      whatsMsg: 'Hola, he visto vuestra web y me gustaría más información.',
+      whatsAria: 'Escribir por WhatsApp', hablamos: '¿Hablamos?',
+      cVer: 'Ver', cZoom: 'Zoom', cVideo: 'Ver vídeo', cEncargar: 'Encargar',
+      pref: 'Preferencias', cerrarPref: 'Cerrar preferencias', idioma: 'Idioma',
+      puntero: 'Puntero interactivo', anim: 'Animaciones', textoGrande: 'Texto más grande',
+      restablecer: 'Restablecer', restablecidas: 'Preferencias restablecidas.',
+      abrirMenu: 'Abrir menú', menu: 'Menú', cerrarMenu: 'Cerrar menú',
+      menuPie: 'Hecho a mano · Piezas únicas · Cursos y talleres',
+      buscarWeb: 'Buscar en la web', buscarPh: 'Busca tazas, cursos, encargos…', cerrarBuscador: 'Cerrar buscador',
+      prueba: 'Prueba con:', sugerencias: ['taza', 'curso', 'encargo', 'gratis'],
+      sinRes: 'No hay resultados para «%s».', encargoQ: '¿Te lo hago por encargo?',
+      compartir: 'Compartir', copiado: 'Enlace copiado.', arriba: 'Volver arriba',
+      carrito: 'Carrito', tuCarrito: 'Tu carrito', cerrarCarrito: 'Cerrar carrito', finalizar: 'Finalizar compra',
+      notaMuestra: 'Web de muestra: el pago real lo gestionará WooCommerce.',
+      vacio: 'Todavía no has añadido nada.', quitar: 'Quitar', art1: '1 artículo', artN: '%n artículos',
+      yaEsta: 'Ya está en tu carrito.', pago: 'Aquí empezaría el pago con WooCommerce.', carritoVacio: 'El carrito está vacío.',
+      seleccionadas: 'Seleccionadas: ', res1: '1 resultado', resN: '%n resultados'
+    },
+    ca: {
+      whatsMsg: 'Hola, he vist el vostre web i m’agradaria tenir més informació.',
+      whatsAria: 'Escriu-nos per WhatsApp', hablamos: 'En parlem?',
+      cVer: 'Veure', cZoom: 'Zoom', cVideo: 'Veure vídeo', cEncargar: 'Encarregar',
+      pref: 'Preferències', cerrarPref: 'Tanca les preferències', idioma: 'Idioma',
+      puntero: 'Punter interactiu', anim: 'Animacions', textoGrande: 'Text més gran',
+      restablecer: 'Restableix', restablecidas: 'Preferències restablertes.',
+      abrirMenu: 'Obre el menú', menu: 'Menú', cerrarMenu: 'Tanca el menú',
+      menuPie: 'Fet a mà · Peces úniques · Cursos i tallers',
+      buscarWeb: 'Cerca al web', buscarPh: 'Cerca tasses, cursos, encàrrecs…', cerrarBuscador: 'Tanca el cercador',
+      prueba: 'Prova amb:', sugerencias: ['tassa', 'curs', 'encàrrec', 'gratis'],
+      sinRes: 'No hi ha resultats per a «%s».', encargoQ: 'Te’l faig per encàrrec?',
+      compartir: 'Comparteix', copiado: 'Enllaç copiat.', arriba: 'Torna a dalt',
+      carrito: 'Cistella', tuCarrito: 'La teva cistella', cerrarCarrito: 'Tanca la cistella', finalizar: 'Finalitza la compra',
+      notaMuestra: 'Web de mostra: el pagament real el gestionarà WooCommerce.',
+      vacio: 'Encara no has afegit res.', quitar: 'Treu', art1: '1 article', artN: '%n articles',
+      yaEsta: 'Ja és a la teva cistella.', pago: 'Aquí començaria el pagament amb WooCommerce.', carritoVacio: 'La cistella és buida.',
+      seleccionadas: 'Seleccionades: ', res1: '1 resultat', resN: '%n resultats'
+    },
+    en: {
+      whatsMsg: 'Hi! I’ve seen your website and would like some more information.',
+      whatsAria: 'Message us on WhatsApp', hablamos: 'Chat with us',
+      cVer: 'View', cZoom: 'Zoom', cVideo: 'Watch', cEncargar: 'Order',
+      pref: 'Preferences', cerrarPref: 'Close preferences', idioma: 'Language',
+      puntero: 'Interactive cursor', anim: 'Animations', textoGrande: 'Larger text',
+      restablecer: 'Reset', restablecidas: 'Preferences reset.',
+      abrirMenu: 'Open menu', menu: 'Menu', cerrarMenu: 'Close menu',
+      menuPie: 'Handmade · One-of-a-kind pieces · Courses and workshops',
+      buscarWeb: 'Search the site', buscarPh: 'Search mugs, courses, commissions…', cerrarBuscador: 'Close search',
+      prueba: 'Try:', sugerencias: ['mug', 'course', 'commission', 'free'],
+      sinRes: 'No results for “%s”.', encargoQ: 'Shall I make it to order?',
+      compartir: 'Share', copiado: 'Link copied.', arriba: 'Back to top',
+      carrito: 'Cart', tuCarrito: 'Your cart', cerrarCarrito: 'Close cart', finalizar: 'Checkout',
+      notaMuestra: 'Demo site: real payments will be handled by WooCommerce.',
+      vacio: 'Nothing here yet.', quitar: 'Remove', art1: '1 item', artN: '%n items',
+      yaEsta: 'It’s already in your cart.', pago: 'This is where WooCommerce checkout would start.', carritoVacio: 'Your cart is empty.',
+      seleccionadas: 'Selected: ', res1: '1 result', resN: '%n results'
+    }
+  };
+  if (!TEXTOS[IDIOMA]) IDIOMA = 'es';
+  var T = TEXTOS[IDIOMA];
+
   /* ---------- Preferencias del visitante (se guardan en su navegador) ---------- */
   var CLAVE_PREFS = 'mimo-preferencias';
   var prefs = {};
@@ -39,18 +104,18 @@
   /* ---------- Botón de WhatsApp ---------- */
   /* Cambia aquí el número (con prefijo de país, sin + ni espacios) y el mensaje */
   var WHATSAPP_NUMERO = '34600000000';
-  var WHATSAPP_MENSAJE = 'Hola, he visto vuestra web y me gustaría más información.';
+  var WHATSAPP_MENSAJE = T.whatsMsg;
   var whatsapp = document.createElement('a');
   whatsapp.className = 'whatsapp';
   whatsapp.href = 'https://wa.me/' + WHATSAPP_NUMERO + '?text=' + encodeURIComponent(WHATSAPP_MENSAJE);
   whatsapp.target = '_blank';
   whatsapp.rel = 'noopener';
-  whatsapp.setAttribute('aria-label', 'Escribir por WhatsApp');
+  whatsapp.setAttribute('aria-label', T.whatsAria);
   whatsapp.innerHTML =
     '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
     '<path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5z"/>' +
     '<path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg>' +
-    '<span class="whatsapp-texto">¿Hablamos?</span>';
+    '<span class="whatsapp-texto">' + T.hablamos + '</span>';
   document.body.appendChild(whatsapp);
 
   /* ---------- Puntero interactivo (ratón y pantallas táctiles) ---------- */
@@ -115,10 +180,10 @@
       anillo.classList.remove('activo', 'ver');
       punto.classList.remove('encima');
       if (foto) {
-        var texto = foto.classList.contains('zoom') ? 'Zoom'
-          : foto.classList.contains('video') ? 'Ver vídeo'
-          : foto.classList.contains('tarjeta-encargo') ? 'Encargar'
-          : 'Ver';
+        var texto = foto.classList.contains('zoom') ? T.cZoom
+          : foto.classList.contains('video') ? T.cVideo
+          : foto.classList.contains('tarjeta-encargo') ? T.cEncargar
+          : T.cVer;
         etiquetaAnillo.textContent = texto;
         anillo.classList.add('ver');
         punto.classList.add('encima');
@@ -140,7 +205,7 @@
     var rueda = document.createElement('button');
     rueda.type = 'button';
     rueda.className = 'icono-btn boton-ajustes';
-    rueda.setAttribute('aria-label', 'Preferencias');
+    rueda.setAttribute('aria-label', T.pref);
     rueda.setAttribute('aria-expanded', 'false');
     rueda.setAttribute('aria-controls', 'panel-ajustes');
     rueda.innerHTML = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>';
@@ -150,36 +215,38 @@
     panel.className = 'panel-ajustes';
     panel.id = 'panel-ajustes';
     panel.setAttribute('role', 'dialog');
-    panel.setAttribute('aria-label', 'Preferencias');
+    panel.setAttribute('aria-label', T.pref);
     panel.inert = true;
     function interruptor(clave, texto) {
       return '<button type="button" class="interruptor" role="switch" aria-checked="false" data-pref="' + clave + '">' +
         '<span>' + texto + '</span><span class="pista-switch" aria-hidden="true"><span class="mando"></span></span></button>';
     }
     panel.innerHTML =
-      '<div class="ajustes-cabeza"><b>Preferencias</b>' +
-      '<button type="button" class="icono-btn cerrar-ajustes" aria-label="Cerrar preferencias"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>' +
-      '<div><span class="ajuste-titulo" id="titulo-idioma">Idioma</span>' +
+      '<div class="ajustes-cabeza"><b>' + T.pref + '</b>' +
+      '<button type="button" class="icono-btn cerrar-ajustes" aria-label="' + T.cerrarPref + '"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>' +
+      '<div><span class="ajuste-titulo" id="titulo-idioma">' + T.idioma + '</span>' +
       '<div class="segmentado" role="group" aria-labelledby="titulo-idioma">' +
       '<button type="button" data-idioma="es" aria-pressed="false">Español</button>' +
       '<button type="button" data-idioma="ca" aria-pressed="false">Català</button>' +
       '<button type="button" data-idioma="en" aria-pressed="false">English</button></div></div>' +
       '<div class="ajustes-lista">' +
-      interruptor('puntero', 'Puntero interactivo') +
-      interruptor('animaciones', 'Animaciones') +
-      interruptor('textoGrande', 'Texto más grande') +
+      interruptor('puntero', T.puntero) +
+      interruptor('animaciones', T.anim) +
+      interruptor('textoGrande', T.textoGrande) +
       '</div>' +
-      '<button type="button" class="restablecer">Restablecer</button>';
+      '<button type="button" class="restablecer">' + T.restablecer + '</button>';
     document.body.appendChild(panel);
 
-    var AVISOS_IDIOMA = {
-      es: 'Idioma: español.',
-      ca: 'Versió en català: a la web real es carregarà amb el connector d’idiomes.',
-      en: 'English version: on the real site it will load with the language plugin.'
-    };
+    /* Lleva a la misma página en el idioma elegido: / (es), /ca/ y /en/ */
+    function urlIdioma(destino) {
+      var archivo = window.location.pathname.split('/').pop();
+      if (!/\.html$/.test(archivo)) archivo = 'index.html';
+      var base = IDIOMA === 'es' ? '' : '../';
+      return base + (destino === 'es' ? '' : destino + '/') + archivo + window.location.search + window.location.hash;
+    }
 
     function pintarAjustes() {
-      var idioma = prefs.idioma || 'es';
+      var idioma = IDIOMA;
       panel.querySelectorAll('[data-idioma]').forEach(function (b) {
         b.setAttribute('aria-pressed', String(b.getAttribute('data-idioma') === idioma));
       });
@@ -217,9 +284,10 @@
     panel.addEventListener('click', function (e) {
       var idioma = e.target.closest('[data-idioma]');
       if (idioma) {
-        prefs.idioma = idioma.getAttribute('data-idioma');
-        guardarPrefs(); pintarAjustes();
-        avisar(AVISOS_IDIOMA[prefs.idioma]);
+        var destino = idioma.getAttribute('data-idioma');
+        prefs.idioma = destino;
+        guardarPrefs();
+        if (destino !== IDIOMA) window.location.href = urlIdioma(destino);
         return;
       }
       var sw = e.target.closest('[data-pref]');
@@ -239,7 +307,7 @@
         prefs = {};
         reducir = reducirSistema;
         guardarPrefs(); aplicarClases(); aplicarPuntero(); pintarAjustes();
-        avisar('Preferencias restablecidas.');
+        avisar(T.restablecidas);
       }
     });
   }
@@ -250,14 +318,14 @@
     var botonMenu = document.createElement('button');
     botonMenu.type = 'button';
     botonMenu.className = 'icono-btn boton-menu';
-    botonMenu.setAttribute('aria-label', 'Abrir menú');
+    botonMenu.setAttribute('aria-label', T.abrirMenu);
     botonMenu.setAttribute('aria-expanded', 'false');
     botonMenu.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>';
     iconos.appendChild(botonMenu);
 
     var menuMovil = document.createElement('nav');
     menuMovil.className = 'menu-movil';
-    menuMovil.setAttribute('aria-label', 'Menú');
+    menuMovil.setAttribute('aria-label', T.menu);
     menuMovil.inert = true;
     var enlacesMenu = '';
     navPrincipal.querySelectorAll('a').forEach(function (a, i) {
@@ -265,9 +333,9 @@
         (a.getAttribute('aria-current') ? ' aria-current="page"' : '') + '>' + a.textContent + '</a>';
     });
     menuMovil.innerHTML =
-      '<button type="button" class="icono-btn cerrar-menu" aria-label="Cerrar menú"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' +
+      '<button type="button" class="icono-btn cerrar-menu" aria-label="' + T.cerrarMenu + '"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' +
       '<div class="menu-movil-enlaces">' + enlacesMenu + '</div>' +
-      '<p class="menu-movil-pie">Hecho a mano · Piezas únicas · Cursos y talleres</p>';
+      '<p class="menu-movil-pie">' + T.menuPie + '</p>';
     document.body.appendChild(menuMovil);
 
     function abrirMenu() {
@@ -292,37 +360,68 @@
   }
 
   /* ---------- Buscador ---------- */
-  var INDICE = [
-    { t: 'Taza «El sabio de la pizarra»', c: 'Pieza única · Disponible', u: 'producto.html', k: 'taza sabio pizarra formulas ciencia profesor pelo blanco' },
-    { t: 'Taza «La jardinera»', c: 'Pieza única · Vendida', u: 'personalizados.html', k: 'taza jardinera flores sombrero chica vendida' },
-    { t: 'Tienda', c: 'Página', u: 'tienda.html', k: 'tienda comprar tazas llaveros imanes figuras productos' },
-    { t: 'Pedidos personalizados', c: 'Página', u: 'personalizados.html', k: 'encargo personalizado presupuesto a medida regalo mascota personaje' },
-    { t: 'Modela tu primera figura en taza', c: 'Curso online · De pago', u: 'curso.html', k: 'curso online modelar figura taza iniciacion pago' },
-    { t: 'Iniciación a la arcilla polimérica', c: 'Curso online · Gratis', u: 'taller.html#cursos', k: 'curso gratis gratuito iniciacion arcilla polimerica materiales' },
-    { t: 'Rostros y expresiones en miniatura', c: 'Curso online · De pago', u: 'taller.html#cursos', k: 'curso caras rostros expresiones intermedio' },
-    { t: 'Tu taza en una mañana', c: 'Taller presencial · De pago', u: 'taller.html#presencial', k: 'taller presencial mañana grupo taza' },
-    { t: 'Taller familiar de modelado', c: 'Taller presencial · De pago', u: 'taller.html#presencial', k: 'taller familiar niños familia presencial' },
-    { t: 'Charlas y vídeos', c: 'Contenido gratuito', u: 'taller.html#charlas', k: 'charlas videos gratis proceso cuidados' },
-    { t: 'Preguntas frecuentes', c: 'Ayuda', u: 'index.html#preguntas', k: 'preguntas faq lavavajillas envio devolucion plazo cuidados microondas' },
-    { t: 'Contacto', c: 'Ayuda', u: 'index.html#contacto', k: 'contacto correo whatsapp novedades' }
-  ];
+  var INDICES = {
+    es: [
+      { t: 'Taza «El sabio de la pizarra»', c: 'Pieza única · Disponible', u: 'producto.html', k: 'taza sabio pizarra formulas ciencia profesor pelo blanco' },
+      { t: 'Taza «La jardinera»', c: 'Pieza única · Vendida', u: 'personalizados.html', k: 'taza jardinera flores sombrero chica vendida' },
+      { t: 'Tienda', c: 'Página', u: 'tienda.html', k: 'tienda comprar tazas llaveros imanes figuras productos' },
+      { t: 'Pedidos personalizados', c: 'Página', u: 'personalizados.html', k: 'encargo personalizado presupuesto a medida regalo mascota personaje' },
+      { t: 'Modela tu primera figura en taza', c: 'Curso online · De pago', u: 'curso.html', k: 'curso online modelar figura taza iniciacion pago' },
+      { t: 'Iniciación a la arcilla polimérica', c: 'Curso online · Gratis', u: 'taller.html#cursos', k: 'curso gratis gratuito iniciacion arcilla polimerica materiales' },
+      { t: 'Rostros y expresiones en miniatura', c: 'Curso online · De pago', u: 'taller.html#cursos', k: 'curso caras rostros expresiones intermedio' },
+      { t: 'Tu taza en una mañana', c: 'Taller presencial · De pago', u: 'taller.html#presencial', k: 'taller presencial mañana grupo taza' },
+      { t: 'Taller familiar de modelado', c: 'Taller presencial · De pago', u: 'taller.html#presencial', k: 'taller familiar niños familia presencial' },
+      { t: 'Charlas y vídeos', c: 'Contenido gratuito', u: 'taller.html#charlas', k: 'charlas videos gratis proceso cuidados' },
+      { t: 'Preguntas frecuentes', c: 'Ayuda', u: 'index.html#preguntas', k: 'preguntas faq lavavajillas envio devolucion plazo cuidados microondas' },
+      { t: 'Contacto', c: 'Ayuda', u: 'index.html#contacto', k: 'contacto correo whatsapp novedades' }
+    ],
+    ca: [
+      { t: 'Tassa «El savi de la pissarra»', c: 'Peça única · Disponible', u: 'producto.html', k: 'tassa savi pissarra formules ciencia professor cabells blancs' },
+      { t: 'Tassa «La jardinera»', c: 'Peça única · Venuda', u: 'personalizados.html', k: 'tassa jardinera flors barret noia venuda' },
+      { t: 'Botiga', c: 'Pàgina', u: 'tienda.html', k: 'botiga comprar tasses clauers imants figures productes' },
+      { t: 'Encàrrecs personalitzats', c: 'Pàgina', u: 'personalizados.html', k: 'encarrec personalitzat pressupost a mida regal mascota personatge' },
+      { t: 'Modela la teva primera figura en una tassa', c: 'Curs en línia · De pagament', u: 'curso.html', k: 'curs en linia online modelar figura tassa iniciacio pagament' },
+      { t: 'Iniciació a l’argila polimèrica', c: 'Curs en línia · Gratuït', u: 'taller.html#cursos', k: 'curs gratis gratuit iniciacio argila polimerica materials' },
+      { t: 'Rostres i expressions en miniatura', c: 'Curs en línia · De pagament', u: 'taller.html#cursos', k: 'curs cares rostres expressions intermedi' },
+      { t: 'La teva tassa en un matí', c: 'Taller presencial · De pagament', u: 'taller.html#presencial', k: 'taller presencial mati grup tassa' },
+      { t: 'Taller familiar de modelatge', c: 'Taller presencial · De pagament', u: 'taller.html#presencial', k: 'taller familiar nens familia presencial' },
+      { t: 'Xerrades i vídeos', c: 'Contingut gratuït', u: 'taller.html#charlas', k: 'xerrades videos gratis proces cures' },
+      { t: 'Preguntes freqüents', c: 'Ajuda', u: 'index.html#preguntas', k: 'preguntes faq rentaplats enviament devolucio termini cures microones' },
+      { t: 'Contacte', c: 'Ajuda', u: 'index.html#contacto', k: 'contacte correu whatsapp novetats' }
+    ],
+    en: [
+      { t: '“The Blackboard Sage” mug', c: 'One-of-a-kind · Available', u: 'producto.html', k: 'mug cup sage blackboard formulas science professor white hair' },
+      { t: '“The Gardener” mug', c: 'One-of-a-kind · Sold', u: 'personalizados.html', k: 'mug cup gardener flowers hat girl sold' },
+      { t: 'Shop', c: 'Page', u: 'tienda.html', k: 'shop store buy mugs keyrings magnets figures products' },
+      { t: 'Custom orders', c: 'Page', u: 'personalizados.html', k: 'commission custom order quote made to order gift pet character' },
+      { t: 'Sculpt your first figure on a mug', c: 'Online course · Paid', u: 'curso.html', k: 'course online sculpt model figure mug beginner paid' },
+      { t: 'Introduction to polymer clay', c: 'Online course · Free', u: 'taller.html#cursos', k: 'course free beginner introduction polymer clay materials' },
+      { t: 'Miniature faces and expressions', c: 'Online course · Paid', u: 'taller.html#cursos', k: 'course faces expressions intermediate' },
+      { t: 'Your mug in a morning', c: 'In-person workshop · Paid', u: 'taller.html#presencial', k: 'workshop in-person in person morning group mug' },
+      { t: 'Family sculpting workshop', c: 'In-person workshop · Paid', u: 'taller.html#presencial', k: 'workshop family kids children in-person' },
+      { t: 'Talks and videos', c: 'Free content', u: 'taller.html#charlas', k: 'talks videos free process care' },
+      { t: 'FAQ', c: 'Help', u: 'index.html#preguntas', k: 'questions faq dishwasher shipping returns delivery time care microwave' },
+      { t: 'Contact', c: 'Help', u: 'index.html#contacto', k: 'contact email whatsapp news newsletter' }
+    ]
+  };
+  var INDICE = INDICES[IDIOMA];
   function normalizar(t) {
     return String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
   }
-  var botonBuscar = iconos && iconos.querySelector('[aria-label="Buscar"]');
+  var botonBuscar = iconos && iconos.querySelector('.boton-buscar');
   if (botonBuscar) {
     botonBuscar.removeAttribute('data-aviso');
     botonBuscar.setAttribute('aria-expanded', 'false');
     var buscador = document.createElement('div');
     buscador.className = 'buscador';
     buscador.setAttribute('role', 'dialog');
-    buscador.setAttribute('aria-label', 'Buscar en la web');
+    buscador.setAttribute('aria-label', T.buscarWeb);
     buscador.inert = true;
     buscador.innerHTML =
       '<div class="contenedor">' +
       '<div class="buscador-caja"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>' +
-      '<input type="search" placeholder="Busca tazas, cursos, encargos…" aria-label="Buscar en la web" autocomplete="off">' +
-      '<button type="button" class="icono-btn cerrar-buscador" aria-label="Cerrar buscador"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>' +
+      '<input type="search" placeholder="' + T.buscarPh + '" aria-label="' + T.buscarWeb + '" autocomplete="off">' +
+      '<button type="button" class="icono-btn cerrar-buscador" aria-label="' + T.cerrarBuscador + '"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>' +
       '<ul class="buscador-resultados" aria-live="polite"></ul></div>';
     var veloBuscador = document.createElement('div');
     veloBuscador.className = 'velo velo-buscador';
@@ -334,7 +433,9 @@
     function pintarResultados() {
       var q = normalizar(campoBuscar.value.trim());
       if (!q) {
-        listaResultados.innerHTML = '<li class="buscador-pista">Prueba con: <button type="button" data-sugerencia="taza">taza</button> <button type="button" data-sugerencia="curso">curso</button> <button type="button" data-sugerencia="encargo">encargo</button> <button type="button" data-sugerencia="gratis">gratis</button></li>';
+        listaResultados.innerHTML = '<li class="buscador-pista">' + T.prueba + ' ' + T.sugerencias.map(function (s) {
+          return '<button type="button" data-sugerencia="' + s + '">' + s + '</button>';
+        }).join(' ') + '</li>';
         return;
       }
       var palabras = q.split(/\s+/);
@@ -346,7 +447,7 @@
         ? encontrados.map(function (it) {
             return '<li><a href="' + it.u + '"><b>' + escapar(it.t) + '</b><span>' + escapar(it.c) + '</span></a></li>';
           }).join('')
-        : '<li class="buscador-pista">No hay resultados para «' + escapar(campoBuscar.value) + '». <a class="enlace" href="personalizados.html">¿Te lo hago por encargo?</a></li>';
+        : '<li class="buscador-pista">' + T.sinRes.replace('%s', escapar(campoBuscar.value)) + ' <a class="enlace" href="personalizados.html">' + T.encargoQ + '</a></li>';
     }
     function abrirBuscador() {
       buscador.inert = false;
@@ -402,7 +503,7 @@
     var compartir = document.createElement('button');
     compartir.type = 'button';
     compartir.className = 'compartir';
-    compartir.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Compartir';
+    compartir.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>' + T.compartir;
     var contenedorCompra = botonCompra.parentNode;
     if (contenedorCompra.classList.contains('compra')) {
       contenedorCompra.parentNode.insertBefore(compartir, contenedorCompra.nextSibling);
@@ -414,7 +515,7 @@
       if (navigator.share) {
         navigator.share(datos).catch(function () {});
       } else if (navigator.clipboard) {
-        navigator.clipboard.writeText(datos.url).then(function () { avisar('Enlace copiado.'); }, function () { avisar(datos.url); });
+        navigator.clipboard.writeText(datos.url).then(function () { avisar(T.copiado); }, function () { avisar(datos.url); });
       } else {
         avisar(datos.url);
       }
@@ -429,7 +530,7 @@
   var arriba = document.createElement('button');
   arriba.type = 'button';
   arriba.className = 'arriba';
-  arriba.setAttribute('aria-label', 'Volver arriba');
+  arriba.setAttribute('aria-label', T.arriba);
   arriba.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>';
   arriba.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reducir ? 'auto' : 'smooth' }); });
   document.body.appendChild(arriba);
@@ -503,17 +604,17 @@
   velo.className = 'velo';
   var cajon = document.createElement('aside');
   cajon.className = 'cajon';
-  cajon.setAttribute('aria-label', 'Carrito');
+  cajon.setAttribute('aria-label', T.carrito);
   cajon.inert = true;
   cajon.innerHTML =
-    '<div class="cajon-cabeza"><h2>Tu carrito</h2>' +
-    '<button class="icono-btn cerrar-cajon" type="button" aria-label="Cerrar carrito">' +
+    '<div class="cajon-cabeza"><h2>' + T.tuCarrito + '</h2>' +
+    '<button class="icono-btn cerrar-cajon" type="button" aria-label="' + T.cerrarCarrito + '">' +
     '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>' +
     '</button></div>' +
     '<ul class="cajon-lista"></ul>' +
     '<div class="cajon-pie"><div class="cajon-total"></div>' +
-    '<button class="boton boton-acento finalizar" type="button">Finalizar compra</button>' +
-    '<p class="nota-muestra">Web de muestra: el pago real lo gestionará WooCommerce.</p></div>';
+    '<button class="boton boton-acento finalizar" type="button">' + T.finalizar + '</button>' +
+    '<p class="nota-muestra">' + T.notaMuestra + '</p></div>';
   document.body.appendChild(velo);
   document.body.appendChild(cajon);
   var listaCajon = cajon.querySelector('.cajon-lista');
@@ -529,14 +630,14 @@
   function pintar() {
     var lista = leer();
     if (!lista.length) {
-      listaCajon.innerHTML = '<li class="cajon-vacio">Todavía no has añadido nada.</li>';
+      listaCajon.innerHTML = '<li class="cajon-vacio">' + T.vacio + '</li>';
     } else {
       listaCajon.innerHTML = lista.map(function (item, i) {
         return '<li class="cajon-item"><div><b>' + escapar(item.nombre) + '</b><span>' + escapar(item.precio) + '</span></div>' +
-          '<button type="button" class="quitar" data-quitar="' + i + '" aria-label="Quitar ' + escapar(item.nombre) + '">Quitar</button></li>';
+          '<button type="button" class="quitar" data-quitar="' + i + '" aria-label="' + T.quitar + ' ' + escapar(item.nombre) + '">' + T.quitar + '</button></li>';
       }).join('');
     }
-    totalCajon.textContent = lista.length === 1 ? '1 artículo' : lista.length + ' artículos';
+    totalCajon.textContent = lista.length === 1 ? T.art1 : T.artN.replace('%n', lista.length);
     document.querySelectorAll('.contador').forEach(function (c) {
       c.textContent = lista.length;
       c.classList.toggle('activo', lista.length > 0);
@@ -578,7 +679,7 @@
       var nombre = anadir.getAttribute('data-nombre');
       var repetido = lista.some(function (x) { return x.nombre === nombre; });
       if (repetido) {
-        avisar(anadir.getAttribute('data-repetido') || 'Ya está en tu carrito.');
+        avisar(anadir.getAttribute('data-repetido') || T.yaEsta);
         abrir();
         return;
       }
@@ -600,7 +701,7 @@
       return;
     }
     if (e.target.closest('.finalizar')) {
-      avisar(leer().length ? 'Aquí empezaría el pago con WooCommerce.' : 'El carrito está vacío.');
+      avisar(leer().length ? T.pago : T.carritoVacio);
       return;
     }
     var conAviso = e.target.closest('[data-aviso]');
@@ -624,7 +725,7 @@
     if (!destino) return;
     input.addEventListener('change', function () {
       var nombres = Array.prototype.map.call(input.files, function (f) { return f.name; });
-      destino.textContent = nombres.length ? 'Seleccionadas: ' + nombres.join(', ') : '';
+      destino.textContent = nombres.length ? T.seleccionadas + nombres.join(', ') : '';
     });
   });
 
@@ -674,7 +775,7 @@
       }
     });
     if (sinResultados) sinResultados.hidden = visibles > 0;
-    if (cuenta) cuenta.textContent = visibles === 1 ? '1 resultado' : visibles + ' resultados';
+    if (cuenta) cuenta.textContent = visibles === 1 ? T.res1 : T.resN.replace('%n', visibles);
   }
   filtros.forEach(function (filtro) {
     filtro.addEventListener('click', function () { filtrar(filtro, true); });
