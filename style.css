@@ -507,6 +507,13 @@ button.boton-contorno { color: inherit; }
 .cursor-anillo.pulsado { scale: .85; }
 .cursor-visible .cursor-punto.encima { opacity: 0; }
 .cursor-escondido .cursor-punto, .cursor-escondido .cursor-anillo { opacity: 0 !important; }
+/* En el móvil: el anillo con el punto dentro, un poco más grande y con pulso al tocar */
+.cursor-tactil .cursor-anillo { width: 40px; height: 40px; margin: -20px 0 0 -20px; }
+.cursor-tactil .cursor-punto { opacity: 0 !important; }
+.cursor-tactil .cursor-anillo::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--acento); position: absolute; }
+.cursor-tactil .cursor-anillo.ver::after, .cursor-tactil .cursor-anillo.activo::after { opacity: 0; }
+.cursor-anillo.pulso { animation: pulso-toque .5s ease; }
+@keyframes pulso-toque { 40% { scale: 1.35; } }
 
 /* Respeta a quien prefiere menos movimiento */
 @media (prefers-reduced-motion: reduce) {

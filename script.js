@@ -38,8 +38,9 @@
     '<span class="whatsapp-texto">¿Hablamos?</span>';
   document.body.appendChild(whatsapp);
 
-  /* ---------- Puntero interactivo (solo con ratón) ---------- */
-  if (conRaton) {
+  /* ---------- Puntero interactivo (ratón y pantallas táctiles) ---------- */
+  var tactil = !conRaton && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  if (conRaton || tactil) {
     var punto = document.createElement('div');
     punto.className = 'cursor-punto';
     var anillo = document.createElement('div');
@@ -50,10 +51,29 @@
     anillo.setAttribute('aria-hidden', 'true');
     document.body.appendChild(anillo);
     document.body.appendChild(punto);
-    raiz.classList.add('cursor-propio');
+    if (conRaton) raiz.classList.add('cursor-propio');
+    else raiz.classList.add('cursor-tactil');
 
     var mx = -100, my = -100, ax = -100, ay = -100, moviendo = false;
-    var suavidad = reducir ? 1 : 0.18;
+    var suavidad = reducir ? 1 : (tactil ? 0.12 : 0.18);
+    function moverA(x, y) {
+      mx = x; my = y;
+      punto.style.transform = 'translate(' + mx + 'px,' + my + 'px)';
+      raiz.classList.add('cursor-visible');
+      if (!moviendo) { moviendo = true; requestAnimationFrame(seguir); }
+    }
+    if (tactil) {
+      document.addEventListener('touchstart', function (e) {
+        var t = e.touches[0];
+        if (ax < 0) { ax = t.clientX; ay = t.clientY; }
+        moverA(t.clientX, t.clientY);
+        anillo.classList.remove('pulso'); void anillo.offsetWidth; anillo.classList.add('pulso');
+      }, { passive: true });
+      document.addEventListener('touchmove', function (e) {
+        var t = e.touches[0];
+        moverA(t.clientX, t.clientY);
+      }, { passive: true });
+    }
     function seguir() {
       ax += (mx - ax) * suavidad;
       ay += (my - ay) * suavidad;
@@ -64,12 +84,9 @@
         moviendo = false;
       }
     }
-    document.addEventListener('mousemove', function (e) {
-      mx = e.clientX; my = e.clientY;
-      punto.style.transform = 'translate(' + mx + 'px,' + my + 'px)';
-      raiz.classList.add('cursor-visible');
-      if (!moviendo) { moviendo = true; requestAnimationFrame(seguir); }
-    });
+    if (conRaton) {
+      document.addEventListener('mousemove', function (e) { moverA(e.clientX, e.clientY); });
+    }
     document.addEventListener('mouseleave', function () { raiz.classList.remove('cursor-visible'); });
     document.addEventListener('mousedown', function () { anillo.classList.add('pulsado'); });
     document.addEventListener('mouseup', function () { anillo.classList.remove('pulsado'); });
