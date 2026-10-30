@@ -21,6 +21,23 @@
     temporizador = setTimeout(function () { aviso.classList.remove('visible'); }, 3200);
   }
 
+  /* ---------- Botón de WhatsApp ---------- */
+  /* Cambia aquí el número (con prefijo de país, sin + ni espacios) y el mensaje */
+  var WHATSAPP_NUMERO = '34600000000';
+  var WHATSAPP_MENSAJE = 'Hola, he visto vuestra web y me gustaría más información.';
+  var whatsapp = document.createElement('a');
+  whatsapp.className = 'whatsapp';
+  whatsapp.href = 'https://wa.me/' + WHATSAPP_NUMERO + '?text=' + encodeURIComponent(WHATSAPP_MENSAJE);
+  whatsapp.target = '_blank';
+  whatsapp.rel = 'noopener';
+  whatsapp.setAttribute('aria-label', 'Escribir por WhatsApp');
+  whatsapp.innerHTML =
+    '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5z"/>' +
+    '<path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg>' +
+    '<span class="whatsapp-texto">¿Hablamos?</span>';
+  document.body.appendChild(whatsapp);
+
   /* ---------- Barra de progreso y botón de volver arriba ---------- */
   var progreso = document.createElement('div');
   progreso.className = 'progreso';
