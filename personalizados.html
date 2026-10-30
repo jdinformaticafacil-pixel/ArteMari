@@ -9,7 +9,12 @@
 </head>
 <body>
 
-<div class="aviso">Hecho a mano · Piezas únicas · Pedidos personalizados</div>
+<div class="aviso"><div class="pista">
+<span>Hecho a mano</span><span>Piezas únicas</span><span>Pedidos personalizados</span><span>Cursos y talleres</span>
+<span aria-hidden="true">Hecho a mano</span><span aria-hidden="true">Piezas únicas</span><span aria-hidden="true">Pedidos personalizados</span><span aria-hidden="true">Cursos y talleres</span>
+<span aria-hidden="true">Hecho a mano</span><span aria-hidden="true">Piezas únicas</span><span aria-hidden="true">Pedidos personalizados</span><span aria-hidden="true">Cursos y talleres</span>
+<span aria-hidden="true">Hecho a mano</span><span aria-hidden="true">Piezas únicas</span><span aria-hidden="true">Pedidos personalizados</span><span aria-hidden="true">Cursos y talleres</span>
+</div></div>
 
 <header class="cabecera">
   <div class="contenedor">
@@ -17,12 +22,12 @@
     <nav class="menu" aria-label="Principal">
       <a href="index.html#tienda">Tienda</a>
       <a href="personalizados.html" aria-current="page">Personalizados</a>
-      <a href="index.html#taller">El taller</a>
+      <a href="taller.html">Taller y cursos</a>
       <a href="index.html#contacto">Contacto</a>
     </nav>
     <div class="iconos">
-      <button class="icono-btn" aria-label="Buscar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
-      <button class="icono-btn" aria-label="Carrito"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.2 11h10.6L20 7H6.2"/><circle cx="9" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/></svg></button>
+      <button class="icono-btn" type="button" aria-label="Buscar" data-aviso="El buscador funcionará en la tienda real."><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+      <button class="icono-btn boton-carrito" type="button" aria-label="Abrir carrito"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.2 11h10.6L20 7H6.2"/><circle cx="9" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/></svg><span class="contador" aria-hidden="true">0</span></button>
     </div>
   </div>
 </header>
@@ -33,7 +38,7 @@
   <div class="contenedor">
     <div class="interior">
       <div class="sobretitulo">Por encargo</div>
-      <h1>Tu idea, modelada a mano</h1>
+      <h1 class="titulo-animado"><span class="palabra" style="--i:0">Tu</span> <span class="palabra" style="--i:1">idea,</span> <span class="palabra" style="--i:2">modelada</span> <span class="palabra" style="--i:3">a</span> <span class="palabra" style="--i:4">mano</span></h1>
       <p>Un personaje favorito, una mascota, un oficio, un recuerdo. Cuéntame qué imaginas y te preparo un presupuesto sin compromiso.</p>
     </div>
   </div>
@@ -41,11 +46,11 @@
 
 <section class="seccion" style="padding: 72px 0 24px">
   <div class="contenedor">
-    <div class="pasos-cortos">
-      <div class="paso"><div class="numero">1</div><b>Cuéntame tu idea</b><span>Con el formulario de esta página.</span></div>
-      <div class="paso"><div class="numero">2</div><b>Presupuesto y plazo</b><span>Te respondo en [X] días con precio y fecha.</span></div>
-      <div class="paso"><div class="numero">3</div><b>Modelado a mano</b><span>Pago el encargo y empiezo a esculpir.</span></div>
-      <div class="paso"><div class="numero">4</div><b>Envío</b><span>Embalada con cuidado, hasta tu puerta.</span></div>
+    <div class="pasos-cortos escalonado">
+      <div class="paso revelar"><div class="numero">1</div><b>Cuéntame tu idea</b><span>Con el formulario de esta página.</span></div>
+      <div class="paso revelar"><div class="numero">2</div><b>Presupuesto y plazo</b><span>Te respondo en [X] días con precio y fecha.</span></div>
+      <div class="paso revelar"><div class="numero">3</div><b>Modelado a mano</b><span>Pagas el encargo y empiezo a esculpir.</span></div>
+      <div class="paso revelar"><div class="numero">4</div><b>Envío</b><span>Embalada con cuidado, hasta tu puerta.</span></div>
     </div>
   </div>
 </section>
@@ -53,12 +58,12 @@
 <section class="seccion" style="padding: 48px 0 96px">
   <div class="contenedor encargo">
 
-    <form class="formulario" onsubmit="event.preventDefault(); alert('Formulario de muestra: todavía no envía nada.');">
+    <form class="formulario revelar" data-demo="¡Solicitud recibida! En la web real te llegaría un correo de confirmación.">
       <h2>Pide tu presupuesto</h2>
 
       <div class="fila">
-        <div class="campo"><label for="nombre">Tu nombre</label><input id="nombre" type="text"></div>
-        <div class="campo"><label for="email">Correo electrónico</label><input id="email" type="email"></div>
+        <div class="campo"><label for="nombre">Tu nombre</label><input id="nombre" type="text" autocomplete="name" required></div>
+        <div class="campo"><label for="email">Correo electrónico</label><input id="email" type="email" autocomplete="email" required></div>
       </div>
 
       <div class="fila">
@@ -71,33 +76,39 @@
 
       <div class="campo">
         <label for="idea">Cuéntame tu idea</label>
-        <textarea id="idea" rows="5" placeholder="Personaje, colores, detalles que no pueden faltar, para quién es…"></textarea>
+        <textarea id="idea" rows="5" placeholder="Personaje, colores, detalles que no pueden faltar, para quién es…" required></textarea>
       </div>
 
       <div class="campo">
         <label for="fotos">Fotos de referencia</label>
-        <input id="fotos" type="file" multiple>
+        <input id="fotos" type="file" accept="image/*" multiple>
+        <div class="lista-archivos" aria-live="polite"></div>
       </div>
 
       <div class="consentimiento">
-        <input id="acepto" type="checkbox">
+        <input id="acepto" type="checkbox" required>
         <label for="acepto">He leído la política de privacidad y acepto que uses estos datos para responder a mi solicitud. [ENLACE A LA POLÍTICA]</label>
       </div>
 
-      <button class="boton boton-acento" type="submit">Enviar solicitud</button>
+      <button class="boton boton-acento" type="submit">Enviar solicitud<svg class="flecha" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     </form>
 
-    <aside class="lateral">
+    <aside class="lateral revelar">
       <h2>Trabajos anteriores</h2>
       <div class="fotos">
-        <img src="taza-jardinera.jpg" alt="Taza con figura de una chica con sombrero y un ramo de flores" style="object-position: 50% 35%">
-        <img src="taza-sabio.jpg" alt="Taza con figura de un sabio junto a una pizarra con fórmulas" style="object-position: 20% 60%">
+        <div class="marco" style="border-radius: 20px"><img src="taza-jardinera.jpg" alt="Taza con figura de una chica con sombrero y un ramo de flores" style="object-position: 50% 35%; border-radius: 0"></div>
+        <div class="marco" style="border-radius: 20px"><img src="taza-sabio.jpg" alt="Taza con figura de un sabio junto a una pizarra con fórmulas" style="object-position: 20% 60%; border-radius: 0"></div>
       </div>
       <div class="nota">
         <b>Antes de pedir</b>
         <span>Plazo habitual de elaboración: [X] semanas.</span>
         <span>Precio orientativo: desde [XX] €, según complejidad.</span>
         <span>[CONDICIONES DE LOS PEDIDOS A MEDIDA: cambios y devoluciones]</span>
+      </div>
+      <div class="nota">
+        <b>¿Prefieres hacerla tú?</b>
+        <span>En el taller enseño a modelar tu propia figura, online o en persona.</span>
+        <a class="enlace" href="taller.html">Ver cursos y talleres</a>
       </div>
     </aside>
 
@@ -106,13 +117,22 @@
 
 </main>
 
-<footer class="pie pie-simple">
+<footer class="pie">
   <div class="contenedor">
-    <div class="logo">Mimo &amp; Arcilla</div>
-    <nav aria-label="Legal"><a href="index.html#contacto">Aviso legal</a><a href="index.html#contacto">Privacidad</a><a href="index.html#contacto">Cookies</a><a href="index.html#contacto">Condiciones de venta</a></nav>
-    <div>© 2026 [NOMBRE DE LA MARCA] · Web de muestra</div>
+    <div class="pie-columnas">
+      <div class="pie-marca">
+        <div class="logo">Mimo &amp; Arcilla</div>
+        <p>Tazas y figuras de arcilla polimérica, modeladas a mano. Cursos y talleres.</p>
+      </div>
+      <div class="pie-col"><b>Tienda</b><a href="index.html#tienda">Tazas</a><a href="index.html#tienda">Llaveros</a><a href="index.html#tienda">Imanes</a><a href="personalizados.html">Personalizados</a></div>
+      <div class="pie-col"><b>Formación</b><a href="taller.html#cursos">Cursos online</a><a href="taller.html#presencial">Talleres presenciales</a><a href="taller.html#charlas">Charlas</a></div>
+      <div class="pie-col"><b>Ayuda</b><a href="index.html#contacto">Envíos y devoluciones</a><a href="index.html#contacto">Cuidados de la pieza</a><a href="index.html#contacto">Preguntas frecuentes</a><a href="index.html#contacto">Contacto</a></div>
+      <div class="pie-col"><b>Legal</b><a href="index.html#contacto">Aviso legal</a><a href="index.html#contacto">Política de privacidad</a><a href="index.html#contacto">Cookies</a><a href="index.html#contacto">Condiciones de venta</a></div>
+    </div>
+    <div class="pie-copy">© 2026 [NOMBRE DE LA MARCA]. Todos los derechos reservados. · Web de muestra</div>
   </div>
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>
