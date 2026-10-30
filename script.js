@@ -7,6 +7,21 @@
   var reducir = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var conRaton = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
+  /* ---------- Preferencias del visitante (se guardan en su navegador) ---------- */
+  var CLAVE_PREFS = 'mimo-preferencias';
+  var prefs = {};
+  try { prefs = JSON.parse(localStorage.getItem(CLAVE_PREFS)) || {}; } catch (e) { prefs = {}; }
+  function guardarPrefs() {
+    try { localStorage.setItem(CLAVE_PREFS, JSON.stringify(prefs)); } catch (e) { /* sin almacenamiento */ }
+  }
+  var reducirSistema = reducir;
+  if (typeof prefs.animaciones === 'boolean') reducir = !prefs.animaciones;
+  function aplicarClases() {
+    raiz.classList.toggle('sin-animaciones', reducir);
+    raiz.classList.toggle('texto-grande', !!prefs.textoGrande);
+  }
+  aplicarClases();
+
   /* ---------- Aviso flotante ---------- */
   var aviso = document.createElement('div');
   aviso.className = 'aviso-flotante';
@@ -51,11 +66,10 @@
     anillo.setAttribute('aria-hidden', 'true');
     document.body.appendChild(anillo);
     document.body.appendChild(punto);
-    if (conRaton) raiz.classList.add('cursor-propio');
-    else raiz.classList.add('cursor-tactil');
+    if (!conRaton) raiz.classList.add('cursor-tactil');
+    aplicarPuntero();
 
     var mx = -100, my = -100, ax = -100, ay = -100, moviendo = false;
-    var suavidad = reducir ? 1 : (tactil ? 0.12 : 0.18);
     function moverA(x, y) {
       mx = x; my = y;
       punto.style.transform = 'translate(' + mx + 'px,' + my + 'px)';
@@ -75,6 +89,7 @@
       }, { passive: true });
     }
     function seguir() {
+      var suavidad = reducir ? 1 : (tactil ? 0.12 : 0.18);
       ax += (mx - ax) * suavidad;
       ay += (my - ay) * suavidad;
       anillo.style.transform = 'translate(' + ax.toFixed(1) + 'px,' + ay.toFixed(1) + 'px)';
@@ -109,6 +124,122 @@
         punto.classList.add('encima');
       } else if (interactivo) {
         anillo.classList.add('activo');
+      }
+    });
+  }
+
+  function aplicarPuntero() {
+    var activo = prefs.puntero !== false;
+    raiz.classList.toggle('sin-puntero', !activo);
+    if (conRaton) raiz.classList.toggle('cursor-propio', activo);
+  }
+
+  /* ---------- Rueda de preferencias en la cabecera ---------- */
+  var iconos = document.querySelector('.iconos');
+  if (iconos) {
+    var rueda = document.createElement('button');
+    rueda.type = 'button';
+    rueda.className = 'icono-btn boton-ajustes';
+    rueda.setAttribute('aria-label', 'Preferencias');
+    rueda.setAttribute('aria-expanded', 'false');
+    rueda.setAttribute('aria-controls', 'panel-ajustes');
+    rueda.innerHTML = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>';
+    iconos.insertBefore(rueda, iconos.querySelector('.boton-carrito'));
+
+    var panel = document.createElement('div');
+    panel.className = 'panel-ajustes';
+    panel.id = 'panel-ajustes';
+    panel.setAttribute('role', 'dialog');
+    panel.setAttribute('aria-label', 'Preferencias');
+    panel.inert = true;
+    function interruptor(clave, texto) {
+      return '<button type="button" class="interruptor" role="switch" aria-checked="false" data-pref="' + clave + '">' +
+        '<span>' + texto + '</span><span class="pista-switch" aria-hidden="true"><span class="mando"></span></span></button>';
+    }
+    panel.innerHTML =
+      '<div class="ajustes-cabeza"><b>Preferencias</b>' +
+      '<button type="button" class="icono-btn cerrar-ajustes" aria-label="Cerrar preferencias"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>' +
+      '<div><span class="ajuste-titulo" id="titulo-idioma">Idioma</span>' +
+      '<div class="segmentado" role="group" aria-labelledby="titulo-idioma">' +
+      '<button type="button" data-idioma="es" aria-pressed="false">Español</button>' +
+      '<button type="button" data-idioma="ca" aria-pressed="false">Català</button>' +
+      '<button type="button" data-idioma="en" aria-pressed="false">English</button></div></div>' +
+      '<div class="ajustes-lista">' +
+      interruptor('puntero', 'Puntero interactivo') +
+      interruptor('animaciones', 'Animaciones') +
+      interruptor('textoGrande', 'Texto más grande') +
+      '</div>' +
+      '<button type="button" class="restablecer">Restablecer</button>';
+    document.body.appendChild(panel);
+
+    var AVISOS_IDIOMA = {
+      es: 'Idioma: español.',
+      ca: 'Versió en català: a la web real es carregarà amb el connector d’idiomes.',
+      en: 'English version: on the real site it will load with the language plugin.'
+    };
+
+    function pintarAjustes() {
+      var idioma = prefs.idioma || 'es';
+      panel.querySelectorAll('[data-idioma]').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.getAttribute('data-idioma') === idioma));
+      });
+      var valores = { puntero: prefs.puntero !== false, animaciones: !reducir, textoGrande: !!prefs.textoGrande };
+      panel.querySelectorAll('[data-pref]').forEach(function (b) {
+        b.setAttribute('aria-checked', String(valores[b.getAttribute('data-pref')]));
+      });
+    }
+    function abrirAjustes() {
+      var c = document.querySelector('.cabecera');
+      panel.style.top = ((c ? c.getBoundingClientRect().bottom : 70) + 8) + 'px';
+      pintarAjustes();
+      panel.inert = false;
+      panel.classList.add('abierto');
+      rueda.setAttribute('aria-expanded', 'true');
+    }
+    function cerrarAjustes(devolverFoco) {
+      if (!panel.classList.contains('abierto')) return;
+      panel.classList.remove('abierto');
+      panel.inert = true;
+      rueda.setAttribute('aria-expanded', 'false');
+      if (devolverFoco) rueda.focus();
+    }
+
+    rueda.addEventListener('click', function () {
+      if (panel.classList.contains('abierto')) cerrarAjustes(false); else abrirAjustes();
+    });
+    panel.querySelector('.cerrar-ajustes').addEventListener('click', function () { cerrarAjustes(true); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrarAjustes(true); });
+    document.addEventListener('click', function (e) {
+      if (panel.classList.contains('abierto') && !panel.contains(e.target) && !rueda.contains(e.target)) cerrarAjustes(false);
+    });
+    window.addEventListener('scroll', function () { cerrarAjustes(false); }, { passive: true });
+
+    panel.addEventListener('click', function (e) {
+      var idioma = e.target.closest('[data-idioma]');
+      if (idioma) {
+        prefs.idioma = idioma.getAttribute('data-idioma');
+        guardarPrefs(); pintarAjustes();
+        avisar(AVISOS_IDIOMA[prefs.idioma]);
+        return;
+      }
+      var sw = e.target.closest('[data-pref]');
+      if (sw) {
+        var clave = sw.getAttribute('data-pref');
+        var nuevo = sw.getAttribute('aria-checked') !== 'true';
+        if (clave === 'animaciones') { prefs.animaciones = nuevo; reducir = !nuevo; }
+        else prefs[clave] = nuevo;
+        guardarPrefs(); aplicarClases(); aplicarPuntero(); pintarAjustes();
+        if (clave === 'animaciones' && !nuevo) {
+          document.querySelectorAll('.revelar').forEach(function (el) { el.classList.add('visible'); });
+          fotosHero.forEach(function (img) { img.style.transform = ''; });
+        }
+        return;
+      }
+      if (e.target.closest('.restablecer')) {
+        prefs = {};
+        reducir = reducirSistema;
+        guardarPrefs(); aplicarClases(); aplicarPuntero(); pintarAjustes();
+        avisar('Preferencias restablecidas.');
       }
     });
   }
