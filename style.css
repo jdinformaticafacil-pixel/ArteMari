@@ -559,6 +559,13 @@ button.boton-contorno { color: inherit; }
 .menu-movil-enlaces a[aria-current="page"] { color: #E8B9A6; }
 .menu-movil-pie { margin-top: 40px; color: #B9AC9C; font-size: 14px; letter-spacing: .06em; }
 
+/* Tablets y portátiles pequeños: menú en el botón ☰ */
+@media (max-width: 1180px) {
+  .js .menu { display: none; }
+  .js .boton-menu { display: flex; }
+  .js .cabecera .contenedor { flex-wrap: nowrap; }
+}
+
 /* Buscador */
 .velo-buscador { z-index: 95; }
 .buscador { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--crema); padding: 20px 0 24px; box-shadow: 0 20px 50px rgba(36, 28, 25, .18); translate: 0 -105%; visibility: hidden; transition: translate .4s cubic-bezier(.2, .7, .2, 1), visibility 0s .4s; }
