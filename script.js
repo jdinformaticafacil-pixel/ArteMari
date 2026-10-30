@@ -21,6 +21,19 @@
     temporizador = setTimeout(function () { aviso.classList.remove('visible'); }, 3200);
   }
 
+  /* ---------- Barra de progreso y botón de volver arriba ---------- */
+  var progreso = document.createElement('div');
+  progreso.className = 'progreso';
+  progreso.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(progreso);
+  var arriba = document.createElement('button');
+  arriba.type = 'button';
+  arriba.className = 'arriba';
+  arriba.setAttribute('aria-label', 'Volver arriba');
+  arriba.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>';
+  arriba.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reducir ? 'auto' : 'smooth' }); });
+  document.body.appendChild(arriba);
+
   /* ---------- Cabecera compacta y parallax del hero ---------- */
   var cabecera = document.querySelector('.cabecera');
   var fotosHero = document.querySelectorAll('.hero-fotos img');
@@ -28,6 +41,9 @@
   function alDesplazar() {
     pendiente = false;
     var y = window.scrollY || 0;
+    var total = document.documentElement.scrollHeight - window.innerHeight;
+    progreso.style.transform = 'scaleX(' + (total > 0 ? Math.min(1, y / total) : 0).toFixed(4) + ')';
+    arriba.classList.toggle('visible', y > 700);
     if (cabecera) cabecera.classList.toggle('compacta', y > 40);
     if (!reducir && y < 1200) {
       fotosHero.forEach(function (img, i) {
@@ -218,27 +234,37 @@
     }
   }
 
-  /* ---------- Filtros de cursos ---------- */
+  /* ---------- Filtros (cursos y tienda) ---------- */
   var filtros = document.querySelectorAll('.filtro');
-  var cursos = document.querySelectorAll('.curso[data-tipo]');
+  var filtrables = document.querySelectorAll('.filtrable [data-tipo]');
   var sinResultados = document.querySelector('.sin-resultados');
-  filtros.forEach(function (filtro) {
-    filtro.addEventListener('click', function () {
-      var valor = filtro.getAttribute('data-filtro');
-      filtros.forEach(function (o) { o.setAttribute('aria-pressed', String(o === filtro)); });
-      var visibles = 0;
-      cursos.forEach(function (c) {
-        var encaja = valor === 'todos' || c.getAttribute('data-tipo').split(' ').indexOf(valor) > -1;
-        c.classList.toggle('oculto', !encaja);
-        if (encaja) {
-          visibles++;
+  var cuenta = document.querySelector('.cuenta');
+  function filtrar(filtro, animar) {
+    var valor = filtro.getAttribute('data-filtro');
+    filtros.forEach(function (o) { o.setAttribute('aria-pressed', String(o === filtro)); });
+    var visibles = 0;
+    filtrables.forEach(function (c) {
+      var encaja = valor === 'todos' || c.getAttribute('data-tipo').split(' ').indexOf(valor) > -1;
+      c.classList.toggle('oculto', !encaja);
+      if (encaja) {
+        visibles++;
+        if (animar) {
           c.classList.add('visible');
           c.classList.remove('entra'); void c.offsetWidth; c.classList.add('entra');
         }
-      });
-      if (sinResultados) sinResultados.hidden = visibles > 0;
+      }
     });
+    if (sinResultados) sinResultados.hidden = visibles > 0;
+    if (cuenta) cuenta.textContent = visibles === 1 ? '1 resultado' : visibles + ' resultados';
+  }
+  filtros.forEach(function (filtro) {
+    filtro.addEventListener('click', function () { filtrar(filtro, true); });
   });
+  if (filtros.length) {
+    var pedido = new URLSearchParams(window.location.search).get('filtro');
+    var inicial = pedido && document.querySelector('.filtro[data-filtro="' + pedido.replace(/[^a-z]/g, '') + '"]');
+    filtrar(inicial || filtros[0], false);
+  }
 
   /* ---------- Vídeos de muestra ---------- */
   document.querySelectorAll('.video .play').forEach(function (boton) {

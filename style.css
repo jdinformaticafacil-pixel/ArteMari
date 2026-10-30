@@ -1,5 +1,4 @@
 /* Mimo & Arcilla — web de muestra (nombre y paleta provisionales) */
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap");
 
 :root {
   --crema: #F6EFE6;
@@ -438,6 +437,51 @@ button.boton-contorno { color: inherit; }
   .hero-simple .hero-botones .boton { flex: 1 1 100%; }
 }
 
+/* =========================================================
+   Acabado: tienda, vendidas, preguntas, navegación
+   ========================================================= */
+@view-transition { navigation: auto; }
+
+.saltar { position: absolute; left: 16px; top: -64px; z-index: 200; background: var(--tinta); color: var(--crema); padding: 12px 18px; border-radius: 999px; font-weight: 700; transition: top .2s; }
+.saltar:focus { top: 12px; }
+:focus-visible { outline: 3px solid var(--acento); outline-offset: 3px; border-radius: 6px; }
+
+.progreso { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: var(--acento); transform-origin: left; transform: scaleX(0); z-index: 60; pointer-events: none; }
+.arriba { position: fixed; right: 20px; bottom: 20px; z-index: 40; width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--tinta); color: var(--crema); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 10px 24px rgba(36, 28, 25, .25); opacity: 0; translate: 0 12px; pointer-events: none; transition: opacity .3s, translate .3s, background-color .25s; }
+.arriba.visible { opacity: 1; translate: 0 0; pointer-events: auto; }
+.arriba:hover { background: var(--acento); }
+
+.oculto { display: none !important; }
+.entra { animation: aparece .45s ease; }
+
+.barra-filtros { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 24px; margin-bottom: 32px; }
+.barra-filtros .filtros { margin-bottom: 0; }
+.cuenta { color: var(--apagado); font-size: 15px; }
+
+.marco { position: relative; }
+.tarjeta.vendida .marco img { filter: grayscale(.6); opacity: .85; }
+.sello { position: absolute; top: 14px; left: 14px; background: var(--tinta); color: var(--crema); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; }
+.etiqueta-vendida { background: #E7DFD6; color: var(--apagado); }
+.precio-tachado { text-decoration: line-through; color: var(--apagado); font-weight: 500; }
+.tarjeta.proximamente { box-shadow: none; background: transparent; padding: 0; }
+.tarjeta.proximamente:hover { translate: none; box-shadow: none; }
+.tarjeta.proximamente .marcador { aspect-ratio: 1 / 1; border-radius: 16px; }
+.tarjeta.proximamente .tarjeta-info { padding: 0 4px; }
+
+.preguntas-rejilla { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 40px 64px; align-items: start; }
+
+@media (max-width: 1000px) {
+  .preguntas-rejilla { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .arriba { right: 16px; bottom: 16px; width: 44px; height: 44px; }
+  .preguntas-rejilla h2 { font-size: 30px !important; }
+  .barra-filtros .filtros { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-right: -20px; padding-right: 20px; padding-bottom: 4px; }
+  .barra-filtros .filtros::-webkit-scrollbar { display: none; }
+  .filtro { flex: none; }
+  .filtros { gap: 8px; }
+}
+
 /* Respeta a quien prefiere menos movimiento */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -445,4 +489,5 @@ button.boton-contorno { color: inherit; }
   .pista { animation: none; width: auto; justify-content: center; }
   .pista [aria-hidden="true"] { display: none; }
   .js .revelar, .titulo-animado .palabra { opacity: 1; transform: none; }
+  @view-transition { navigation: none; }
 }

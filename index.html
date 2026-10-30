@@ -3,11 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23A04A30'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='32' text-anchor='middle' fill='%23F6EFE6'%3EM%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#241C19">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mimo &amp; Arcilla · Tazas con figuras de arcilla modeladas a mano">
+<meta property="og:description" content="Tazas y figuras de arcilla polimérica modeladas a mano. Piezas únicas, pedidos personalizados, cursos y talleres.">
+<meta property="og:image" content="https://jdinformaticafacil-pixel.github.io/ArteMari/taza-jardinera.jpg">
+<meta property="og:url" content="https://jdinformaticafacil-pixel.github.io/ArteMari/">
+<meta name="twitter:card" content="summary_large_image">
 <title>Mimo &amp; Arcilla · Tazas con figuras de arcilla modeladas a mano</title>
 <meta name="description" content="Tazas y figuras de arcilla polimérica modeladas a mano. Piezas únicas, pedidos personalizados, cursos y talleres.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
 
 <div class="aviso"><div class="pista">
 <span>Hecho a mano</span><span>Piezas únicas</span><span>Pedidos personalizados</span><span>Cursos y talleres</span>
@@ -20,7 +32,7 @@
   <div class="contenedor">
     <a class="logo" href="index.html">Mimo &amp; Arcilla</a>
     <nav class="menu" aria-label="Principal">
-      <a href="#tienda">Tienda</a>
+      <a href="tienda.html">Tienda</a>
       <a href="personalizados.html">Personalizados</a>
       <a href="taller.html">Taller y cursos</a>
       <a href="#contacto">Contacto</a>
@@ -32,7 +44,7 @@
   </div>
 </header>
 
-<main>
+<main id="contenido">
 
 <section class="hero">
   <div class="contenedor">
@@ -41,7 +53,7 @@
       <h1 class="titulo-animado"><span class="palabra" style="--i:0">Tazas</span> <span class="palabra" style="--i:1">con</span> <span class="palabra" style="--i:2">personalidad,</span> <span class="palabra" style="--i:3">pieza</span> <span class="palabra" style="--i:4">a</span> <span class="palabra" style="--i:5">pieza</span></h1>
       <p>Figuras diminutas modeladas a mano sobre taza. Elige una pieza única, encarga la tuya o aprende a modelarla en el taller.</p>
       <div class="hero-botones">
-        <a class="boton boton-acento" href="#tienda">Ver la tienda<svg class="flecha" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="boton boton-acento" href="tienda.html">Ver la tienda<svg class="flecha" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <a class="boton boton-contorno" href="taller.html">Aprende a modelar</a>
       </div>
     </div>
@@ -73,22 +85,22 @@
   <div class="contenedor">
     <div class="cabecera-seccion revelar">
       <h2>Explora por tipo de pieza</h2>
-      <a class="enlace" href="#tienda">Ver toda la tienda</a>
+      <a class="enlace" href="tienda.html">Ver toda la tienda</a>
     </div>
     <div class="categorias escalonado">
-      <a class="categoria revelar" href="#tienda">
-        <div class="marco"><img src="taza-sabio.jpg" alt="" style="object-position: 25% 60%"></div>
+      <a class="categoria revelar" href="tienda.html?filtro=tazas">
+        <div class="marco"><img loading="lazy" decoding="async" src="taza-sabio.jpg" alt="" style="object-position: 25% 60%"></div>
         <b>Tazas</b>
       </a>
-      <a class="categoria revelar" href="#tienda">
+      <a class="categoria revelar" href="tienda.html?filtro=llaveros">
         <div class="marcador">Foto próximamente</div>
         <b>Llaveros</b>
       </a>
-      <a class="categoria revelar" href="#tienda">
+      <a class="categoria revelar" href="tienda.html?filtro=imanes">
         <div class="marcador">Foto próximamente</div>
         <b>Imanes</b>
       </a>
-      <a class="categoria revelar" href="#tienda">
+      <a class="categoria revelar" href="tienda.html?filtro=figuras">
         <div class="marcador">Foto próximamente</div>
         <b>Figuras</b>
       </a>
@@ -99,24 +111,24 @@
 <section class="seccion" style="padding-top: 56px">
   <div class="contenedor">
     <div class="cabecera-seccion revelar">
-      <h2>Piezas disponibles</h2>
+      <h2>Últimas piezas</h2>
       <p>Cada una existe una sola vez.</p>
     </div>
     <div class="productos escalonado">
       <a class="tarjeta revelar" href="producto.html">
-        <div class="marco"><img src="taza-sabio.jpg" alt="Taza con figura de un sabio junto a una pizarra con fórmulas" style="object-position: 20% 62%"></div>
+        <div class="marco"><img loading="lazy" decoding="async" src="taza-sabio.jpg" alt="Taza con figura de un sabio junto a una pizarra con fórmulas" style="object-position: 20% 62%"></div>
         <div class="tarjeta-info">
           <span class="etiqueta">Pieza única</span>
           <h3>Taza «El sabio de la pizarra»</h3>
           <div class="tarjeta-pie"><span class="precio">[XX] €</span><span class="enlace">Ver pieza</span></div>
         </div>
       </a>
-      <a class="tarjeta revelar" href="producto.html">
-        <div class="marco"><img src="taza-jardinera.jpg" alt="Taza con figura de una chica con sombrero y un ramo de flores" style="object-position: 50% 35%"></div>
+      <a class="tarjeta vendida revelar" href="personalizados.html">
+        <div class="marco"><img loading="lazy" decoding="async" src="taza-jardinera.jpg" alt="Taza con figura de una chica con sombrero y un ramo de flores (vendida)" style="object-position: 50% 35%"><span class="sello">Vendida</span></div>
         <div class="tarjeta-info">
-          <span class="etiqueta">Pieza única</span>
+          <span class="etiqueta etiqueta-vendida">Ya tiene dueño</span>
           <h3>Taza «La jardinera»</h3>
-          <div class="tarjeta-pie"><span class="precio">[XX] €</span><span class="enlace">Ver pieza</span></div>
+          <div class="tarjeta-pie"><span class="precio precio-tachado">[XX] €</span><span class="enlace">Encargar una parecida</span></div>
         </div>
       </a>
       <a class="tarjeta-encargo revelar" href="personalizados.html">
@@ -157,7 +169,7 @@
     </div>
     <div class="cursos escalonado">
       <a class="curso revelar" href="curso.html">
-        <div class="marco"><img src="taza-jardinera.jpg" alt="" style="object-position: 50% 40%"><span class="duracion">[X] h de vídeo</span></div>
+        <div class="marco"><img loading="lazy" decoding="async" src="taza-jardinera.jpg" alt="" style="object-position: 50% 40%"><span class="duracion">[X] h de vídeo</span></div>
         <div class="tarjeta-info">
           <div class="insignias"><span class="insignia">Online</span><span class="insignia insignia-pago">De pago</span></div>
           <h3>Modela tu primera figura en taza</h3>
@@ -166,7 +178,7 @@
         </div>
       </a>
       <a class="curso revelar" href="taller.html#cursos">
-        <div class="marco"><img src="taza-sabio.jpg" alt="" style="object-position: 15% 45%"><span class="duracion">[X] min</span></div>
+        <div class="marco"><img loading="lazy" decoding="async" src="taza-sabio.jpg" alt="" style="object-position: 15% 45%"><span class="duracion">[X] min</span></div>
         <div class="tarjeta-info">
           <div class="insignias"><span class="insignia">Online</span><span class="insignia insignia-gratis">Gratis</span></div>
           <h3>Iniciación a la arcilla polimérica</h3>
@@ -175,7 +187,7 @@
         </div>
       </a>
       <a class="curso revelar" href="taller.html#presencial">
-        <div class="marco"><img src="taza-sabio.jpg" alt="" style="object-position: 85% 60%"><span class="duracion">[X] h · en el taller</span></div>
+        <div class="marco"><img loading="lazy" decoding="async" src="taza-sabio.jpg" alt="" style="object-position: 85% 60%"><span class="duracion">[X] h · en el taller</span></div>
         <div class="tarjeta-info">
           <div class="insignias"><span class="insignia">Presencial</span><span class="insignia insignia-pago">De pago</span></div>
           <h3>Tu taza en una mañana</h3>
@@ -189,12 +201,44 @@
 
 <section class="seccion" id="taller">
   <div class="contenedor taller">
-    <img class="revelar" src="taza-sabio.jpg" alt="Detalle de una figura de arcilla modelada a mano sobre una taza">
+    <img loading="lazy" decoding="async" class="revelar" src="taza-sabio.jpg" alt="Detalle de una figura de arcilla modelada a mano sobre una taza">
     <div class="taller-texto revelar">
       <div class="sobretitulo">El taller</div>
       <h2>Pequeñas figuras, mucho cariño</h2>
       <p>[TU HISTORIA: quién eres, desde cuándo modelas y qué te inspira. Dos o tres frases cercanas funcionan mejor que un texto largo.]</p>
       <a class="boton boton-contorno" href="taller.html">Conocer el taller<svg class="flecha" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="seccion pasos-fondo" id="preguntas">
+  <div class="contenedor preguntas-rejilla">
+    <div class="revelar">
+      <div class="sobretitulo" style="margin-bottom: 8px">Preguntas frecuentes</div>
+      <h2 style="font-size: 40px">Lo que más me preguntan</h2>
+      <p style="color: var(--apagado); margin-top: 12px">¿Tienes otra duda? <a class="enlace" href="#contacto">Escríbeme</a>.</p>
+    </div>
+    <div class="temario revelar">
+      <details>
+        <summary>¿Se puede usar la taza a diario y meterla en el lavavajillas?<svg class="mas" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <ul><li>[RESPUESTA SOBRE USO, LAVADO A MANO, LAVAVAJILLAS Y MICROONDAS]</li></ul>
+      </details>
+      <details>
+        <summary>¿Cuánto tarda un pedido personalizado?<svg class="mas" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <ul><li>[PLAZO HABITUAL DE ELABORACIÓN Y DE ENVÍO]</li></ul>
+      </details>
+      <details>
+        <summary>¿Hacéis envíos a toda España?<svg class="mas" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <ul><li>[ZONAS DE ENVÍO, PRECIO Y EMBALAJE]</li></ul>
+      </details>
+      <details>
+        <summary>¿Puedo devolver un pedido hecho a medida?<svg class="mas" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <ul><li>[CONDICIONES DE DEVOLUCIÓN DE PIEZAS PERSONALIZADAS]</li></ul>
+      </details>
+      <details>
+        <summary>¿Necesito experiencia para hacer un curso?<svg class="mas" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <ul><li>No. El curso de iniciación es gratuito y está pensado para empezar desde cero. [AÑADIR DETALLES]</li></ul>
+      </details>
     </div>
   </div>
 </section>
@@ -224,9 +268,9 @@
         <div class="logo">Mimo &amp; Arcilla</div>
         <p>Tazas y figuras de arcilla polimérica, modeladas a mano. Cursos y talleres.</p>
       </div>
-      <div class="pie-col"><b>Tienda</b><a href="#tienda">Tazas</a><a href="#tienda">Llaveros</a><a href="#tienda">Imanes</a><a href="personalizados.html">Personalizados</a></div>
+      <div class="pie-col"><b>Tienda</b><a href="tienda.html?filtro=tazas">Tazas</a><a href="tienda.html?filtro=llaveros">Llaveros</a><a href="tienda.html?filtro=imanes">Imanes</a><a href="personalizados.html">Personalizados</a></div>
       <div class="pie-col"><b>Formación</b><a href="taller.html#cursos">Cursos online</a><a href="taller.html#presencial">Talleres presenciales</a><a href="taller.html#charlas">Charlas</a></div>
-      <div class="pie-col"><b>Ayuda</b><a href="#contacto">Envíos y devoluciones</a><a href="#contacto">Cuidados de la pieza</a><a href="#contacto">Preguntas frecuentes</a><a href="#contacto">Contacto</a></div>
+      <div class="pie-col"><b>Ayuda</b><a href="#preguntas">Envíos y devoluciones</a><a href="#preguntas">Cuidados de la pieza</a><a href="#preguntas">Preguntas frecuentes</a><a href="#contacto">Contacto</a></div>
       <div class="pie-col"><b>Legal</b><a href="#contacto">Aviso legal</a><a href="#contacto">Política de privacidad</a><a href="#contacto">Cookies</a><a href="#contacto">Condiciones de venta</a></div>
     </div>
     <div class="pie-copy">© 2026 [NOMBRE DE LA MARCA]. Todos los derechos reservados. · Web de muestra</div>
