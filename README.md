@@ -26,4 +26,5 @@ Traducción manual en tres versiones: español en la raíz, catalán en `ca/` e 
 - **No indexable:** todas las páginas llevan `<meta name="robots" content="noindex">` para que Google no indexe la muestra y no compita con la web real (contenido duplicado). Para quitarlo, borra esa línea.
 - **Fotos:** cada foto tiene versiones WebP de 480, 800 y 1050 px; el navegador elige la adecuada (`srcset`).
 - **Preferencias del visitante:** idioma, puntero, animaciones, texto grande y modo oscuro (rueda de la cabecera).
+- **Diseño adaptable:** probado en 23 tamaños (de 280 px a 3440 px, móviles en vertical y horizontal, tablets y pantallas grandes), en los tres idiomas y con el texto ampliado.
 - **Accesibilidad:** revisada con axe-core (WCAG 2.1 AA) en modo claro y oscuro, sin incidencias.

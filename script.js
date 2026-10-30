@@ -110,6 +110,32 @@
     temporizador = setTimeout(function () { aviso.classList.remove('visible'); }, 3200);
   }
 
+  /* ---------- Barra superior: repetir las frases hasta cubrir pantallas anchas ---------- */
+  var pista = document.querySelector('.pista');
+  if (pista && pista.children.length >= 4) {
+    var frases = Array.prototype.slice.call(pista.children, 0, 4).map(function (el) { return el.textContent; });
+    var juegosActuales = 0;
+    var montarPista = function () {
+      var anchoJuego = 0;
+      for (var i = 0; i < 4; i++) anchoJuego += pista.children[i].getBoundingClientRect().width;
+      if (!anchoJuego) return;
+      var juegos = Math.max(2, Math.ceil(document.documentElement.clientWidth / anchoJuego) + 1);
+      if (juegos === juegosActuales) return;
+      juegosActuales = juegos;
+      var html = '';
+      for (var j = 0; j < juegos * 2; j++) {
+        frases.forEach(function (f) { html += '<span' + (j ? ' aria-hidden="true"' : '') + '>' + escapar(f) + '</span>'; });
+      }
+      pista.innerHTML = html;
+      /* misma velocidad en cualquier pantalla: unos 47 px por segundo */
+      pista.style.animationDuration = Math.round(anchoJuego * juegos / 47) + 's';
+    };
+    montarPista();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { juegosActuales = 0; montarPista(); });
+    var esperaPista;
+    window.addEventListener('resize', function () { clearTimeout(esperaPista); esperaPista = setTimeout(montarPista, 200); });
+  }
+
   /* ---------- Botón de WhatsApp ---------- */
   /* Cambia aquí el número (con prefijo de país, sin + ni espacios) y el mensaje */
   var WHATSAPP_NUMERO = '34600000000';
@@ -272,7 +298,9 @@
     }
     function abrirAjustes() {
       var c = document.querySelector('.cabecera');
-      panel.style.top = ((c ? c.getBoundingClientRect().bottom : 70) + 8) + 'px';
+      var arribaPanel = (c ? c.getBoundingClientRect().bottom : 70) + 8;
+      panel.style.top = arribaPanel + 'px';
+      panel.style.maxHeight = Math.max(180, window.innerHeight - arribaPanel - 12) + 'px';
       pintarAjustes();
       panel.inert = false;
       panel.classList.add('abierto');
