@@ -493,6 +493,21 @@ button.boton-contorno { color: inherit; }
   .arriba { bottom: 70px; }
 }
 
+/* Puntero interactivo (solo ordenador con ratón) */
+.cursor-propio, .cursor-propio * { cursor: none !important; }
+.cursor-propio input, .cursor-propio textarea, .cursor-propio select { cursor: auto !important; }
+.cursor-punto, .cursor-anillo { position: fixed; top: 0; left: 0; z-index: 300; pointer-events: none; border-radius: 50%; opacity: 0; }
+.cursor-punto { width: 8px; height: 8px; margin: -4px 0 0 -4px; background: var(--acento); box-shadow: 0 0 0 1.5px rgba(246, 239, 230, .9); transition: opacity .2s; }
+.cursor-anillo { width: 36px; height: 36px; margin: -18px 0 0 -18px; border: 1.5px solid var(--acento); box-shadow: 0 0 0 1.5px rgba(246, 239, 230, .7), inset 0 0 0 1.5px rgba(246, 239, 230, .7); display: flex; align-items: center; justify-content: center; transition: width .3s cubic-bezier(.2, .7, .2, 1), height .3s cubic-bezier(.2, .7, .2, 1), margin .3s cubic-bezier(.2, .7, .2, 1), background-color .3s, scale .15s, opacity .2s; }
+.cursor-anillo span { color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .04em; white-space: nowrap; opacity: 0; transition: opacity .2s; }
+.cursor-visible .cursor-punto, .cursor-visible .cursor-anillo { opacity: 1; }
+.cursor-anillo.activo { width: 56px; height: 56px; margin: -28px 0 0 -28px; background: rgba(160, 74, 48, .14); }
+.cursor-anillo.ver { width: 84px; height: 84px; margin: -42px 0 0 -42px; background: var(--acento); }
+.cursor-anillo.ver span { opacity: 1; }
+.cursor-anillo.pulsado { scale: .85; }
+.cursor-visible .cursor-punto.encima { opacity: 0; }
+.cursor-escondido .cursor-punto, .cursor-escondido .cursor-anillo { opacity: 0 !important; }
+
 /* Respeta a quien prefiere menos movimiento */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

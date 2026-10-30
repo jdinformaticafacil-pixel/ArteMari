@@ -38,6 +38,64 @@
     '<span class="whatsapp-texto">¿Hablamos?</span>';
   document.body.appendChild(whatsapp);
 
+  /* ---------- Puntero interactivo (solo con ratón) ---------- */
+  if (conRaton) {
+    var punto = document.createElement('div');
+    punto.className = 'cursor-punto';
+    var anillo = document.createElement('div');
+    anillo.className = 'cursor-anillo';
+    anillo.innerHTML = '<span></span>';
+    var etiquetaAnillo = anillo.querySelector('span');
+    punto.setAttribute('aria-hidden', 'true');
+    anillo.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(anillo);
+    document.body.appendChild(punto);
+    raiz.classList.add('cursor-propio');
+
+    var mx = -100, my = -100, ax = -100, ay = -100, moviendo = false;
+    var suavidad = reducir ? 1 : 0.18;
+    function seguir() {
+      ax += (mx - ax) * suavidad;
+      ay += (my - ay) * suavidad;
+      anillo.style.transform = 'translate(' + ax.toFixed(1) + 'px,' + ay.toFixed(1) + 'px)';
+      if (Math.abs(mx - ax) > 0.1 || Math.abs(my - ay) > 0.1) {
+        requestAnimationFrame(seguir);
+      } else {
+        moviendo = false;
+      }
+    }
+    document.addEventListener('mousemove', function (e) {
+      mx = e.clientX; my = e.clientY;
+      punto.style.transform = 'translate(' + mx + 'px,' + my + 'px)';
+      raiz.classList.add('cursor-visible');
+      if (!moviendo) { moviendo = true; requestAnimationFrame(seguir); }
+    });
+    document.addEventListener('mouseleave', function () { raiz.classList.remove('cursor-visible'); });
+    document.addEventListener('mousedown', function () { anillo.classList.add('pulsado'); });
+    document.addEventListener('mouseup', function () { anillo.classList.remove('pulsado'); });
+
+    document.addEventListener('mouseover', function (e) {
+      var t = e.target;
+      var campo = t.closest('input, textarea, select');
+      raiz.classList.toggle('cursor-escondido', !!campo);
+      var foto = t.closest('.tarjeta:not(.proximamente), .curso, .categoria, .zoom, .video, .tarjeta-encargo');
+      var interactivo = t.closest('a, button, summary, label');
+      anillo.classList.remove('activo', 'ver');
+      punto.classList.remove('encima');
+      if (foto) {
+        var texto = foto.classList.contains('zoom') ? 'Zoom'
+          : foto.classList.contains('video') ? 'Ver vídeo'
+          : foto.classList.contains('tarjeta-encargo') ? 'Encargar'
+          : 'Ver';
+        etiquetaAnillo.textContent = texto;
+        anillo.classList.add('ver');
+        punto.classList.add('encima');
+      } else if (interactivo) {
+        anillo.classList.add('activo');
+      }
+    });
+  }
+
   /* ---------- Barra de progreso y botón de volver arriba ---------- */
   var progreso = document.createElement('div');
   progreso.className = 'progreso';
