@@ -244,6 +244,183 @@
     });
   }
 
+  /* ---------- Menú móvil a pantalla completa ---------- */
+  var navPrincipal = document.querySelector('.menu');
+  if (iconos && navPrincipal) {
+    var botonMenu = document.createElement('button');
+    botonMenu.type = 'button';
+    botonMenu.className = 'icono-btn boton-menu';
+    botonMenu.setAttribute('aria-label', 'Abrir menú');
+    botonMenu.setAttribute('aria-expanded', 'false');
+    botonMenu.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>';
+    iconos.appendChild(botonMenu);
+
+    var menuMovil = document.createElement('nav');
+    menuMovil.className = 'menu-movil';
+    menuMovil.setAttribute('aria-label', 'Menú');
+    menuMovil.inert = true;
+    var enlacesMenu = '';
+    navPrincipal.querySelectorAll('a').forEach(function (a, i) {
+      enlacesMenu += '<a href="' + a.getAttribute('href') + '" style="--i:' + i + '"' +
+        (a.getAttribute('aria-current') ? ' aria-current="page"' : '') + '>' + a.textContent + '</a>';
+    });
+    menuMovil.innerHTML =
+      '<button type="button" class="icono-btn cerrar-menu" aria-label="Cerrar menú"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' +
+      '<div class="menu-movil-enlaces">' + enlacesMenu + '</div>' +
+      '<p class="menu-movil-pie">Hecho a mano · Piezas únicas · Cursos y talleres</p>';
+    document.body.appendChild(menuMovil);
+
+    function abrirMenu() {
+      menuMovil.inert = false;
+      menuMovil.classList.add('abierto');
+      botonMenu.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('sin-scroll');
+      setTimeout(function () { menuMovil.querySelector('.cerrar-menu').focus(); }, 50);
+    }
+    function cerrarMenu() {
+      if (!menuMovil.classList.contains('abierto')) return;
+      menuMovil.classList.remove('abierto');
+      menuMovil.inert = true;
+      botonMenu.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('sin-scroll');
+      botonMenu.focus();
+    }
+    botonMenu.addEventListener('click', abrirMenu);
+    menuMovil.querySelector('.cerrar-menu').addEventListener('click', cerrarMenu);
+    menuMovil.addEventListener('click', function (e) { if (e.target.closest('a')) cerrarMenu(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrarMenu(); });
+  }
+
+  /* ---------- Buscador ---------- */
+  var INDICE = [
+    { t: 'Taza «El sabio de la pizarra»', c: 'Pieza única · Disponible', u: 'producto.html', k: 'taza sabio pizarra formulas ciencia profesor pelo blanco' },
+    { t: 'Taza «La jardinera»', c: 'Pieza única · Vendida', u: 'personalizados.html', k: 'taza jardinera flores sombrero chica vendida' },
+    { t: 'Tienda', c: 'Página', u: 'tienda.html', k: 'tienda comprar tazas llaveros imanes figuras productos' },
+    { t: 'Pedidos personalizados', c: 'Página', u: 'personalizados.html', k: 'encargo personalizado presupuesto a medida regalo mascota personaje' },
+    { t: 'Modela tu primera figura en taza', c: 'Curso online · De pago', u: 'curso.html', k: 'curso online modelar figura taza iniciacion pago' },
+    { t: 'Iniciación a la arcilla polimérica', c: 'Curso online · Gratis', u: 'taller.html#cursos', k: 'curso gratis gratuito iniciacion arcilla polimerica materiales' },
+    { t: 'Rostros y expresiones en miniatura', c: 'Curso online · De pago', u: 'taller.html#cursos', k: 'curso caras rostros expresiones intermedio' },
+    { t: 'Tu taza en una mañana', c: 'Taller presencial · De pago', u: 'taller.html#presencial', k: 'taller presencial mañana grupo taza' },
+    { t: 'Taller familiar de modelado', c: 'Taller presencial · De pago', u: 'taller.html#presencial', k: 'taller familiar niños familia presencial' },
+    { t: 'Charlas y vídeos', c: 'Contenido gratuito', u: 'taller.html#charlas', k: 'charlas videos gratis proceso cuidados' },
+    { t: 'Preguntas frecuentes', c: 'Ayuda', u: 'index.html#preguntas', k: 'preguntas faq lavavajillas envio devolucion plazo cuidados microondas' },
+    { t: 'Contacto', c: 'Ayuda', u: 'index.html#contacto', k: 'contacto correo whatsapp novedades' }
+  ];
+  function normalizar(t) {
+    return String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  }
+  var botonBuscar = iconos && iconos.querySelector('[aria-label="Buscar"]');
+  if (botonBuscar) {
+    botonBuscar.removeAttribute('data-aviso');
+    botonBuscar.setAttribute('aria-expanded', 'false');
+    var buscador = document.createElement('div');
+    buscador.className = 'buscador';
+    buscador.setAttribute('role', 'dialog');
+    buscador.setAttribute('aria-label', 'Buscar en la web');
+    buscador.inert = true;
+    buscador.innerHTML =
+      '<div class="contenedor">' +
+      '<div class="buscador-caja"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>' +
+      '<input type="search" placeholder="Busca tazas, cursos, encargos…" aria-label="Buscar en la web" autocomplete="off">' +
+      '<button type="button" class="icono-btn cerrar-buscador" aria-label="Cerrar buscador"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>' +
+      '<ul class="buscador-resultados" aria-live="polite"></ul></div>';
+    var veloBuscador = document.createElement('div');
+    veloBuscador.className = 'velo velo-buscador';
+    document.body.appendChild(veloBuscador);
+    document.body.appendChild(buscador);
+    var campoBuscar = buscador.querySelector('input');
+    var listaResultados = buscador.querySelector('.buscador-resultados');
+
+    function pintarResultados() {
+      var q = normalizar(campoBuscar.value.trim());
+      if (!q) {
+        listaResultados.innerHTML = '<li class="buscador-pista">Prueba con: <button type="button" data-sugerencia="taza">taza</button> <button type="button" data-sugerencia="curso">curso</button> <button type="button" data-sugerencia="encargo">encargo</button> <button type="button" data-sugerencia="gratis">gratis</button></li>';
+        return;
+      }
+      var palabras = q.split(/\s+/);
+      var encontrados = INDICE.filter(function (it) {
+        var texto = normalizar(it.t + ' ' + it.c + ' ' + it.k);
+        return palabras.every(function (p) { return texto.indexOf(p) > -1; });
+      });
+      listaResultados.innerHTML = encontrados.length
+        ? encontrados.map(function (it) {
+            return '<li><a href="' + it.u + '"><b>' + escapar(it.t) + '</b><span>' + escapar(it.c) + '</span></a></li>';
+          }).join('')
+        : '<li class="buscador-pista">No hay resultados para «' + escapar(campoBuscar.value) + '». <a class="enlace" href="personalizados.html">¿Te lo hago por encargo?</a></li>';
+    }
+    function abrirBuscador() {
+      buscador.inert = false;
+      buscador.classList.add('abierto');
+      veloBuscador.classList.add('abierto');
+      botonBuscar.setAttribute('aria-expanded', 'true');
+      pintarResultados();
+      setTimeout(function () { campoBuscar.focus(); }, 60);
+    }
+    function cerrarBuscador() {
+      if (!buscador.classList.contains('abierto')) return;
+      buscador.classList.remove('abierto');
+      veloBuscador.classList.remove('abierto');
+      buscador.inert = true;
+      botonBuscar.setAttribute('aria-expanded', 'false');
+      botonBuscar.focus();
+    }
+    botonBuscar.addEventListener('click', abrirBuscador);
+    buscador.querySelector('.cerrar-buscador').addEventListener('click', cerrarBuscador);
+    veloBuscador.addEventListener('click', cerrarBuscador);
+    campoBuscar.addEventListener('input', pintarResultados);
+    buscador.addEventListener('click', function (e) {
+      var s = e.target.closest('[data-sugerencia]');
+      if (s) { campoBuscar.value = s.getAttribute('data-sugerencia'); pintarResultados(); campoBuscar.focus(); return; }
+      if (e.target.closest('a')) cerrarBuscador();
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrarBuscador(); });
+  }
+
+  /* ---------- Barra fija de compra en el móvil y botón de compartir ---------- */
+  var botonCompra = document.querySelector('.compra [data-carrito], .curso-compra [data-carrito]');
+  if (botonCompra) {
+    var precioTexto = (document.querySelector('.detalle .precio-grande, .curso-compra .precio-grande') || {}).textContent || '';
+    var tituloTexto = (document.querySelector('h1') || {}).textContent || '';
+    var barra = document.createElement('div');
+    barra.className = 'barra-compra';
+    barra.setAttribute('aria-hidden', 'true');
+    barra.innerHTML = '<div><b></b><span></span></div>';
+    barra.querySelector('b').textContent = tituloTexto;
+    barra.querySelector('span').textContent = precioTexto;
+    var copia = botonCompra.cloneNode(true);
+    copia.setAttribute('tabindex', '-1');
+    barra.appendChild(copia);
+    document.body.appendChild(barra);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entradas) {
+        var fuera = !entradas[0].isIntersecting && entradas[0].boundingClientRect.top < 0;
+        barra.classList.toggle('visible', fuera);
+        raiz.classList.toggle('con-barra', fuera);
+      }).observe(botonCompra);
+    }
+
+    var compartir = document.createElement('button');
+    compartir.type = 'button';
+    compartir.className = 'compartir';
+    compartir.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Compartir';
+    var contenedorCompra = botonCompra.parentNode;
+    if (contenedorCompra.classList.contains('compra')) {
+      contenedorCompra.parentNode.insertBefore(compartir, contenedorCompra.nextSibling);
+    } else {
+      contenedorCompra.insertBefore(compartir, botonCompra.nextSibling);
+    }
+    compartir.addEventListener('click', function () {
+      var datos = { title: document.title, text: tituloTexto, url: window.location.href.split('?')[0] };
+      if (navigator.share) {
+        navigator.share(datos).catch(function () {});
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(datos.url).then(function () { avisar('Enlace copiado.'); }, function () { avisar(datos.url); });
+      } else {
+        avisar(datos.url);
+      }
+    });
+  }
+
   /* ---------- Barra de progreso y botón de volver arriba ---------- */
   var progreso = document.createElement('div');
   progreso.className = 'progreso';
@@ -270,13 +447,32 @@
     if (cabecera) cabecera.classList.toggle('compacta', y > 40);
     if (!reducir && y < 1200) {
       fotosHero.forEach(function (img, i) {
-        img.style.transform = 'translateY(' + (y * (i ? -0.08 : 0.06)).toFixed(1) + 'px)';
+        var signo = i ? -1 : 1;
+        img.style.transform = 'perspective(900px) translateY(' + (y * (i ? -0.08 : 0.06)).toFixed(1) + 'px)' +
+          ' rotateX(' + (inclinY * -6).toFixed(2) + 'deg) rotateY(' + (inclinX * 8 * signo).toFixed(2) + 'deg)';
       });
     }
   }
   window.addEventListener('scroll', function () {
     if (!pendiente) { pendiente = true; requestAnimationFrame(alDesplazar); }
   }, { passive: true });
+
+  /* Inclinación 3D de las fotos del inicio al mover el ratón */
+  var inclinX = 0, inclinY = 0;
+  var hero = document.querySelector('.hero');
+  if (hero && conRaton) {
+    hero.addEventListener('mousemove', function (e) {
+      if (reducir) return;
+      var r = hero.getBoundingClientRect();
+      inclinX = (e.clientX - r.left) / r.width - 0.5;
+      inclinY = (e.clientY - r.top) / r.height - 0.5;
+      if (!pendiente) { pendiente = true; requestAnimationFrame(alDesplazar); }
+    });
+    hero.addEventListener('mouseleave', function () {
+      inclinX = 0; inclinY = 0;
+      if (!pendiente) { pendiente = true; requestAnimationFrame(alDesplazar); }
+    });
+  }
   alDesplazar();
 
   /* ---------- Aparición al hacer scroll ---------- */

@@ -543,6 +543,60 @@ button.boton-contorno { color: inherit; }
 .sin-animaciones .pista [aria-hidden="true"] { display: none; }
 .js.sin-animaciones .revelar, .sin-animaciones .titulo-animado .palabra { opacity: 1; transform: none; }
 
+/* Fotos del inicio con inclinación 3D */
+.hero-fotos { perspective: 900px; }
+.hero-fotos img { transition: transform .5s cubic-bezier(.2, .7, .2, 1); }
+
+/* Menú móvil a pantalla completa */
+.boton-menu { display: none; }
+.menu-movil { position: fixed; inset: 0; z-index: 105; background: var(--tinta); color: var(--crema); display: flex; flex-direction: column; justify-content: center; padding: 96px 28px 40px; visibility: hidden; clip-path: circle(0 at calc(100% - 38px) 38px); transition: clip-path .6s cubic-bezier(.7, 0, .2, 1), visibility 0s .6s; }
+.menu-movil.abierto { visibility: visible; clip-path: circle(150% at calc(100% - 38px) 38px); transition: clip-path .6s cubic-bezier(.7, 0, .2, 1); }
+.menu-movil .cerrar-menu { position: absolute; top: 14px; right: 14px; color: var(--crema); }
+.menu-movil-enlaces { display: flex; flex-direction: column; gap: 6px; }
+.menu-movil-enlaces a { font-family: var(--serif); font-size: 42px; line-height: 1.2; opacity: 0; translate: 0 24px; transition: opacity .45s, translate .45s, color .2s; }
+.menu-movil.abierto .menu-movil-enlaces a { opacity: 1; translate: 0 0; transition-delay: calc(.25s + var(--i) * .07s); }
+.menu-movil-enlaces a[aria-current="page"] { color: #E8B9A6; }
+.menu-movil-pie { margin-top: 40px; color: #B9AC9C; font-size: 14px; letter-spacing: .06em; }
+
+/* Buscador */
+.velo-buscador { z-index: 95; }
+.buscador { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--crema); padding: 20px 0 24px; box-shadow: 0 20px 50px rgba(36, 28, 25, .18); translate: 0 -105%; visibility: hidden; transition: translate .4s cubic-bezier(.2, .7, .2, 1), visibility 0s .4s; }
+.buscador.abierto { translate: 0 0; visibility: visible; transition: translate .4s cubic-bezier(.2, .7, .2, 1); }
+.buscador-caja { display: flex; align-items: center; gap: 12px; border-bottom: 2px solid var(--tinta); padding-bottom: 8px; }
+.buscador-caja input { flex: 1; min-width: 0; height: 52px; border: 0; background: transparent; font-family: var(--serif); font-size: 28px; color: var(--tinta); outline: none; }
+.buscador-caja input::placeholder { color: #9A8B7E; }
+.buscador-caja input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+.buscador-resultados { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; max-height: 60vh; overflow: auto; }
+.buscador-resultados li a { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; padding: 14px 16px; border-radius: 14px; transition: background-color .2s; }
+.buscador-resultados li a:hover, .buscador-resultados li a:focus-visible { background: #fff; opacity: 1; }
+.buscador-resultados li a span { color: var(--apagado); font-size: 14px; }
+.buscador-pista { color: var(--apagado); padding: 8px 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.buscador-pista button { min-height: 36px; padding: 0 14px; border: 1.5px solid var(--borde); border-radius: 999px; background: transparent; font: inherit; font-size: 14px; color: var(--tinta); cursor: pointer; }
+.buscador-pista button:hover { border-color: var(--tinta); }
+
+/* Compartir y barra fija de compra (solo móvil) */
+.compartir { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0; border: 0; background: none; color: var(--apagado); font: inherit; font-size: 15px; font-weight: 500; cursor: pointer; }
+.compartir:hover { color: var(--tinta); }
+.curso-compra .compartir { align-self: center; }
+.barra-compra { display: none; }
+
+@media (max-width: 640px) {
+  .js .menu { display: none; }
+  .js .boton-menu { display: flex; }
+  .js .cabecera .contenedor { flex-wrap: nowrap; padding-top: 10px; padding-bottom: 10px; }
+  .logo { font-size: 22px; white-space: nowrap; }
+  .iconos { gap: 0; margin-right: -10px; }
+  .buscador-caja input { font-size: 22px; }
+  .barra-compra { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 46; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: #fff; box-shadow: 0 -10px 30px rgba(36, 28, 25, .12); translate: 0 110%; transition: translate .35s cubic-bezier(.2, .7, .2, 1); }
+  .barra-compra.visible { translate: 0 0; }
+  .barra-compra div { min-width: 0; display: flex; flex-direction: column; }
+  .barra-compra b { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .barra-compra span { font-weight: 700; }
+  .barra-compra .boton { flex: none; min-height: 46px; padding: 0 20px; }
+  .con-barra .whatsapp { bottom: 88px; }
+  .con-barra .arriba { bottom: 142px; }
+}
+
 /* Respeta a quien prefiere menos movimiento */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
