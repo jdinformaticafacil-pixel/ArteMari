@@ -10,6 +10,9 @@ Maqueta navegable en HTML, CSS y JavaScript (sin dependencias) de la tienda de t
 - `personalizados.html`: encargos y formulario de presupuesto
 - `taller.html`: cursos (online/presencial, gratis/de pago), charlas en vídeo y agenda
 - `curso.html`: ficha de un curso con temario
+- `sobre.html`: sobre mí, proceso y valores
+- `contacto.html`: formulario, WhatsApp, datos del taller y mapa
+- `legal.html`: aviso legal, privacidad, cookies y condiciones de venta (plantilla para revisar)
 - `404.html`: página de error para GitHub Pages
 
 Los colores están en las variables de `style.css` (bloque `:root`). El carrito, los formularios y los vídeos son de demostración: no envían ni cobran nada.

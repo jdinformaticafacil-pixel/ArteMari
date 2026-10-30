@@ -643,10 +643,46 @@ img[data-ampliar] { cursor: zoom-in; }
 .error-campo::before { content: "!"; flex: none; width: 18px; height: 18px; border-radius: 50%; background: #A3261A; color: #fff; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
 .campo [aria-invalid="true"] { border-color: #A3261A; box-shadow: 0 0 0 3px rgba(163, 38, 26, .12); }
 .consentimiento { flex-wrap: wrap; }
+.consentimiento label { flex: 1 1 0; min-width: 0; }
 .consentimiento .error-campo { flex-basis: 100%; }
+.formulario > .campo { flex: none; }
 .correo .error-campo { color: #fff; }
 .correo .error-campo::before { background: #fff; color: var(--acento); }
 .correo .campo [aria-invalid="true"] { box-shadow: 0 0 0 3px rgba(255, 255, 255, .5); }
+
+/* Sobre mí */
+.taller-texto .firma { font-family: var(--serif); font-style: italic; font-size: 24px; color: var(--tinta); }
+.valores { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px 48px; }
+.valores .confianza-item svg { stroke: var(--acento); }
+.comunidad .hero-botones { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Contacto */
+.boton-whatsapp { background: #1E9E4A; color: #fff; gap: 10px; align-self: flex-start; }
+.boton-whatsapp:hover { box-shadow: 0 10px 24px rgba(30, 158, 74, .35); }
+.mapa { aspect-ratio: 16 / 10; border-radius: 20px; border: 1.5px dashed var(--borde); background: repeating-linear-gradient(45deg, var(--arena) 0 14px, #E4D7C7 14px 28px); display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; color: var(--apagado); font-size: 15px; }
+.consentimiento label a { font-weight: 700; }
+
+/* Textos legales */
+.legal { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 48px; align-items: start; }
+.legal-indice { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 4px; padding-left: 14px; border-left: 2px solid var(--linea); }
+.legal-indice a { min-height: 40px; display: flex; align-items: center; color: var(--apagado); font-weight: 500; }
+.legal-indice a:hover { color: var(--tinta); opacity: 1; }
+.legal-texto { max-width: 760px; }
+.legal-texto h2 { font-size: 30px; margin: 40px 0 14px; scroll-margin-top: 100px; }
+.legal-texto h2:first-child { margin-top: 0; }
+.legal-texto p { margin: 0 0 14px; color: #3D322D; }
+.legal-texto ul { margin: 0 0 14px; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; color: #3D322D; }
+.legal-texto .actualizado { margin-top: 32px; color: var(--apagado); font-size: 14px; }
+
+@media (max-width: 1000px) {
+  .valores { grid-template-columns: 1fr; }
+  .legal { grid-template-columns: 1fr; gap: 24px; }
+  .legal-indice { position: static; flex-direction: row; flex-wrap: wrap; gap: 4px 16px; border-left: 0; padding-left: 0; border-bottom: 1px solid var(--linea); padding-bottom: 12px; }
+}
+@media (max-width: 640px) {
+  .legal-texto h2 { font-size: 26px; }
+  .comunidad .hero-botones .boton { flex: 1 1 100%; }
+}
 
 /* Respeta a quien prefiere menos movimiento */
 @media (prefers-reduced-motion: reduce) {

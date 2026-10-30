@@ -123,6 +123,8 @@
     '<path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg>' +
     '<span class="whatsapp-texto">' + T.hablamos + '</span>';
   document.body.appendChild(whatsapp);
+  /* Los demás enlaces de WhatsApp de la web usan el mismo número y mensaje */
+  document.querySelectorAll('.enlace-whatsapp').forEach(function (a) { a.href = whatsapp.href; });
 
   /* ---------- Puntero interactivo (ratón y pantallas táctiles) ---------- */
   var tactil = !conRaton && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
@@ -379,7 +381,9 @@
       { t: 'Taller familiar de modelado', c: 'Taller presencial · De pago', u: 'taller.html#presencial', k: 'taller familiar niños familia presencial' },
       { t: 'Charlas y vídeos', c: 'Contenido gratuito', u: 'taller.html#charlas', k: 'charlas videos gratis proceso cuidados' },
       { t: 'Preguntas frecuentes', c: 'Ayuda', u: 'index.html#preguntas', k: 'preguntas faq lavavajillas envio devolucion plazo cuidados microondas' },
-      { t: 'Contacto', c: 'Ayuda', u: 'index.html#contacto', k: 'contacto correo whatsapp novedades' }
+      { t: 'Contacto', c: 'Página', u: 'contacto.html', k: 'contacto correo whatsapp escribir mensaje direccion taller horario' },
+      { t: 'Sobre mí', c: 'Página', u: 'sobre.html', k: 'sobre mi historia artesana quien proceso como se hace' },
+      { t: 'Textos legales', c: 'Página', u: 'legal.html', k: 'aviso legal privacidad cookies condiciones venta devoluciones envios' }
     ],
     ca: [
       { t: 'Tassa «El savi de la pissarra»', c: 'Peça única · Disponible', u: 'producto.html', k: 'tassa savi pissarra formules ciencia professor cabells blancs' },
@@ -393,7 +397,9 @@
       { t: 'Taller familiar de modelatge', c: 'Taller presencial · De pagament', u: 'taller.html#presencial', k: 'taller familiar nens familia presencial' },
       { t: 'Xerrades i vídeos', c: 'Contingut gratuït', u: 'taller.html#charlas', k: 'xerrades videos gratis proces cures' },
       { t: 'Preguntes freqüents', c: 'Ajuda', u: 'index.html#preguntas', k: 'preguntes faq rentaplats enviament devolucio termini cures microones' },
-      { t: 'Contacte', c: 'Ajuda', u: 'index.html#contacto', k: 'contacte correu whatsapp novetats' }
+      { t: 'Contacte', c: 'Pàgina', u: 'contacto.html', k: 'contacte correu whatsapp escriure missatge adreca taller horari' },
+      { t: 'Sobre mi', c: 'Pàgina', u: 'sobre.html', k: 'sobre mi historia artesana qui proces com es fa' },
+      { t: 'Textos legals', c: 'Pàgina', u: 'legal.html', k: 'avis legal privacitat galetes cookies condicions venda devolucions enviaments' }
     ],
     en: [
       { t: '“The Blackboard Sage” mug', c: 'One-of-a-kind · Available', u: 'producto.html', k: 'mug cup sage blackboard formulas science professor white hair' },
@@ -407,7 +413,9 @@
       { t: 'Family sculpting workshop', c: 'In-person workshop · Paid', u: 'taller.html#presencial', k: 'workshop family kids children in-person' },
       { t: 'Talks and videos', c: 'Free content', u: 'taller.html#charlas', k: 'talks videos free process care' },
       { t: 'FAQ', c: 'Help', u: 'index.html#preguntas', k: 'questions faq dishwasher shipping returns delivery time care microwave' },
-      { t: 'Contact', c: 'Help', u: 'index.html#contacto', k: 'contact email whatsapp news newsletter' }
+      { t: 'Contact', c: 'Page', u: 'contacto.html', k: 'contact email whatsapp write message address workshop hours' },
+      { t: 'About me', c: 'Page', u: 'sobre.html', k: 'about me story maker artisan who process how it is made' },
+      { t: 'Legal information', c: 'Page', u: 'legal.html', k: 'legal notice privacy cookies terms of sale returns shipping' }
     ]
   };
   var INDICE = INDICES[IDIOMA];
