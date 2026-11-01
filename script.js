@@ -1,4 +1,4 @@
-/* Mimo & Arcilla — interactividad de la web de muestra */
+/* ArteMari — interactividad de la web de muestra */
 (function () {
   'use strict';
 

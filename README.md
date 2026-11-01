@@ -1,4 +1,4 @@
-# Mimo & Arcilla · web de muestra
+# ArteMari · web de muestra
 
 Maqueta navegable en HTML, CSS y JavaScript (sin dependencias) de la tienda de tazas artesanales con sección de formación. El nombre, la paleta y los textos entre corchetes son provisionales.
 
